@@ -1,0 +1,10 @@
+[
+	{
+		"display_name": "Personal Portfolio",
+		"name": "portfolio",
+		"desc": "A portfolio of myself and my projects",
+		"tech": ["SolidJS","Go"],
+		"timeline": "Spring 2024",
+		"type": "personal"
+	}
+]
