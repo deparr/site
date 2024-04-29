@@ -14,6 +14,7 @@ export default function App() {
 				fallback={(err: any, reset: any) => <div onClick={reset}>Error: {err.toString()}</div>}
 			>
 				<NavBar />
+				<div>stars</div>
 				<Router root={(props: any) => <Suspense>{props.children}</Suspense>}>
 					<FileRoutes />
 				</Router>

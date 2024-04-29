@@ -1,4 +1,4 @@
-import { Projects, Project } from "~/components/Project";
+import { Projects, Project } from "~/components/Projects";
 import projectList from "../../shared/projects.json";
 
 export default function Index() {
