@@ -1,17 +1,6 @@
 import { For, createSignal } from "solid-js";
 import "./Projects.css";
 
-export type Project = {
-	display_name?: string;
-	name?: string;
-	desc?: string;
-	tech?: string[];
-	timeline?: string;
-	images?: string[];
-	type?: string;
-	repo?: string;
-}
-
 function ProjectCard(props: Project) {
 	return (
 		<div>
@@ -25,12 +14,12 @@ function ProjectCard(props: Project) {
 
 export function Projects(props: { data: Project[]}) {
 	const [filterIdx, setFilterIdx] = createSignal(0);
-	const filters = ["none","personal","school"];
+	const filters = ["all","personal","school"];
 	const filter = () => filters[filterIdx()]
 
 	const filterProjects = (p: Project) => {
 		const f = filter();
-		if (f === "none") return true;
+		if (f === "all") return true;
 		else return p.type === f;
 	}
 
@@ -39,7 +28,7 @@ export function Projects(props: { data: Project[]}) {
 			<button onClick={() => setFilterIdx(((filterIdx() + 1) % filters.length))}>
 				cycle filter
 			</button>
-			<div>current filter: {filterIdx() || "none"}</div>
+			<div>displaying {filter()} projects</div>
 			<For each={props.data.filter(filterProjects)}>
 				{(p) => <ProjectCard {...p} />}
 			</For>

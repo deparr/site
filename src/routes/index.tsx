@@ -1,11 +1,12 @@
-import { Projects, Project } from "~/components/Projects";
+import { Projects } from "~/components/Projects";
 import projectList from "../../shared/projects.json";
 
 export default function Index() {
 	return (
-		<main>
+		<main id="main">
 			<h1>Welcome!</h1>
 			<Projects data={projectList as Project[]}/>
+			<img src="../../shared/img.jpg"/>
 		</main>
 	);
 }
