@@ -6,7 +6,6 @@ export default function Index() {
 		<main id="main">
 			<h1>Welcome!</h1>
 			<Projects data={projectList as Project[]}/>
-			<img src="../../shared/img.jpg"/>
 		</main>
 	);
 }

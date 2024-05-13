@@ -7,8 +7,8 @@ export default function NavBar() {
 			<a id="navbar-home" href="/">HOME</a>
 			<div id="navbar-rest">
 				<a class="navbar-link" href="https://github.com/deparr">github</a>
-				<a class="navbar-link" href="https://github.com/deparr">other</a>
-				<a class="navbar-link" href="#proj">projects</a>
+				<a class="navbar-link" href="/3d">3d</a>
+				<a class="navbar-link" href="/#proj">projects</a>
 			</div>
 		</div>
 		</>
