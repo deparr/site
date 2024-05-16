@@ -5,7 +5,7 @@
 		"desc": "A portfolio of myself and my projects",
 		"tech": ["SolidJS","Go"],
 		"timeline": "Spring 2024",
-		"type": "personal",
+		"type": "personal,featured",
 		"repo": "https://github.com/deparr/portfolio"
 	},
 	{
@@ -14,7 +14,7 @@
 		"desc": "A portfolio of myself and my projects",
 		"tech": ["SolidJS","Go"],
 		"timeline": "Spring 2024",
-		"type": "school",
+		"type": "school,featured",
 		"repo": "https://github.com/deparr/portfolio"
 	}
 ]

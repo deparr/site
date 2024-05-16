@@ -12,24 +12,20 @@ function ProjectCard(props: Project) {
 	);
 }
 
-export function Projects(props: { data: Project[]}) {
-	const [filterIdx, setFilterIdx] = createSignal(0);
-	const filters = ["all","personal","school"];
-	const filter = () => filters[filterIdx()]
+export function Projects(props: ProjectListProps) {
+	const [filter, setFilter] = createSignal(props.filter);
 
 	const filterProjects = (p: Project) => {
 		const f = filter();
-		if (f === "all") return true;
-		else return p.type === f;
+		if (!f) return true;
+		if (!p.type) return false
+		return p.type.indexOf(f) > -1;
 	}
 
 	return (
-		<div>
-			<button onClick={() => setFilterIdx(((filterIdx() + 1) % filters.length))}>
-				cycle filter
-			</button>
+		<div class="projects-main">
 			<div>displaying {filter()} projects</div>
-			<For each={props.data.filter(filterProjects)}>
+			<For each={props.projs.filter(filterProjects)}>
 				{(p) => <ProjectCard {...p} />}
 			</For>
 		</div>

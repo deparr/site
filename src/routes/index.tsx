@@ -5,7 +5,8 @@ export default function Index() {
 	return (
 		<main id="main">
 			<h1>Welcome!</h1>
-			<Projects data={projectList as Project[]}/>
+			<Projects projs={projectList as Project[]} />
+			<Projects projs={projectList as Project[]} filter="featured" />
 		</main>
 	);
 }

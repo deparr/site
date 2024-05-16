@@ -9,3 +9,9 @@ type Project = {
 	type?: string;
 	repo?: string;
 }
+
+type ProjectListProps = {
+	projs: Project[];
+	filter?: string;
+	linkToAll?: boolean;
+}
