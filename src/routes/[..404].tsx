@@ -12,7 +12,7 @@ export default function NotFound() {
 		<main>
 			<h1>Not found</h1>
 			<p> TODO: make this something cool </p>
-			<A href="/">Go Home</A>
+			<A class="home-link" href="/">Go Home</A>
 		</main>
 		</>
 	)

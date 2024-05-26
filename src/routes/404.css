@@ -2,7 +2,7 @@ p {
 	font-style: italic;
 }
 
-a {
+.home-link {
 	text-transform: uppercase;
 	text-decoration: none;
 }
