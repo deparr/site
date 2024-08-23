@@ -1,10 +1,10 @@
 import { For } from "solid-js";
 
-import "./Projects.css";
+import s from "./Projects.module.css";
 
 function ProjectCard(props: Project) {
     return (
-        <div class="project-card">
+        <div class={s["project-card"]}>
             <span>{props.display_name}</span>
             <br />
             <p>{props.desc}</p>
@@ -15,7 +15,7 @@ function ProjectCard(props: Project) {
 
 export function Projects(props: ProjectListProps) {
     return (
-        <div class="projects-main">
+        <div class={s["projects-main"]}>
             <For each={props.projs}>
                 {(p) => <ProjectCard {...p} />}
             </For>
