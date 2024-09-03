@@ -1,7 +1,7 @@
 .main {
     text-align: center;
     border-radius: 20px;
-    width: 100%;
+    width: 60%;
 }
 
 .h1,
@@ -71,6 +71,10 @@
 .red {
     color: #cc6666;
     fill: #cc6666;
+}
+
+.tr-upper {
+    text-transform: uppercase;
 }
 
 .dbgbd {

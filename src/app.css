@@ -6,15 +6,16 @@
   text-align: center;
   width: 100%;
   box-sizing: border-box;
+  font-size: 16px;
+  /* background-color: #239024; */
 }
 
 body {
   background-color: #343434;
   font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
-  /* padding: 50px 0 0 0; */
   height: 100%;
-  width: 60rem;
+  width: 60%;
   display: block;
   float: none;
   margin-right: auto;
@@ -25,9 +26,8 @@ a {
     text-decoration: none;
 }
 
-
 p {
-  line-height: 1.35;
+  line-height: 1.5;
   color: #e0e0e0;
 }
 
