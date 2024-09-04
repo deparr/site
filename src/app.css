@@ -1,0 +1,33 @@
+:root {
+    --color-bg-0: #000;
+    --color-bg-1: #202020;
+    --color-bg-2: #343434;
+    --color-text: #c5c8c6;
+    --color-accent: #e78c45;
+    --color-low-accent: #a89984;
+	--column-width: 42rem;
+	--column-margin-top: 4rem;
+    font-family: "Berkeley Mono", "JetBrains Mono", sans-serif;
+    color: var(--color-text);
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-bg-1);
+    min-height: 100vh;
+    background-size: 100vh 100vh;
+}
+
+h1 {
+    font-weight: 400;
+    color: var(--color-accent);
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
