@@ -5,9 +5,11 @@
     --color-text: #c5c8c6;
     --color-accent: #e78c45;
     --color-low-accent: #a89984;
+    --color-error-accent: #cc6666;
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
-    font-family: "Berkeley Mono", "JetBrains Mono", sans-serif;
+    --main-font: "Berkeley Mono", "JetBrains Mono", sans-serif;
+    font-family: var(--main-font);
     color: var(--color-text);
 }
 
@@ -30,4 +32,13 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.comment {
+    color: var(--color-low-accent);
+    font-style: italic;
+}
+
+.comment:before {
+    content:"// ";
 }

@@ -79,7 +79,7 @@
 
     ul {
         position: relative;
-        pading: 0;
+        padding: 0;
         margin: 0;
         height: 100%;
         display: flex;
