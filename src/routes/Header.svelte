@@ -1,6 +1,7 @@
 <script>
+    // todo: convert logo svg to component
     import dpar from "$lib/images/dpar.svg";
-    import github from "$lib/images/github.svg";
+    import Github from "$lib/images/Github.svelte";
 </script>
 
 <header>
@@ -29,7 +30,7 @@
 
     <div class="corner">
         <a href="https://github.com/deparr/portfolio">
-            <img src={github} alt="github" />
+            <Github />
         </a>
     </div>
 </header>
@@ -55,12 +56,6 @@
     .logo {
 		width: 3em;
 		height: 3em;
-    }
-
-    .corner img {
-        object-fit: contain;
-        width: 2em;
-        height: 2em;
     }
 
     .corner a {
@@ -113,9 +108,12 @@
         font-weight: bold;
     }
 
+    a {
+        transition: all 0.1s linear;
+    }
+
     a:hover {
         color: var(--color-accent);
         fill: var(--color-accent);
     }
-
 </style>

@@ -1,0 +1,32 @@
+[
+	{
+		"display_name": "Personal Portfolio",
+		"name": "portfolio",
+		"desc": "A portfolio of myself and my projects",
+		"tags": ["SolidJS","Go"],
+		"timeline": "Spring 2024",
+		"type": "personal,featured",
+		"repo": "https://github.com/deparr/portfolio",
+        "img": "portfolio.png"
+	},
+	{
+		"display_name": "Personal Portfolio",
+		"name": "portfolio",
+		"desc": "A portfolio of myself and my projects",
+		"tags": ["SolidJS","Go"],
+		"timeline": "Spring 2024",
+		"type": "personal,featured",
+		"repo": "https://github.com/deparr/portfolio",
+        "img": "portfolio.png"
+	},
+	{
+		"display_name": "Personal Portfolio",
+		"name": "portfolio",
+		"desc": "A portfolio of myself and my projects",
+		"tags": ["SolidJS","Go"],
+		"timeline": "Spring 2024",
+		"type": "personal,featured",
+		"repo": "https://github.com/deparr/portfolio",
+        "img": "portfolio.png"
+	}
+]

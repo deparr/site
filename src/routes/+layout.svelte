@@ -1,12 +1,12 @@
 <script>
     import Header from "./Header.svelte";
-    import  "../app.css";
+    import "../app.css";
 </script>
 
 <div class="app">
     <Header />
     <main>
-        <slot/>
+        <slot />
     </main>
 </div>
 
@@ -18,6 +18,17 @@
         align-items: center;
         background-color: var(--color-bg-0);
     }
+
+    /* .stars { */
+    /*     position: fixed; */
+    /*     top: 0; */
+    /*     left: 0; */
+    /*     width: 50%; */
+    /*     height: 50%; */
+    /*     border-radius: 40px; */
+    /*     /* background-image: linear-gradient(to right, var(--color-accent), var(--color-error-accent)); */
+    /*     /* animation: star-anim 2s linear infinite; */
+    /* } */
 
     main {
         width: 60%;
@@ -35,4 +46,13 @@
         box-shadow: 5px 2px var(--color-bg-2);
     }
 
+    @keyframes star-anim {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>

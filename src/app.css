@@ -8,9 +8,10 @@
     --color-error-accent: #cc6666;
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
-    --main-font: "Berkeley Mono", "JetBrains Mono", sans-serif;
+    --main-font: "Berkeley Mono", "JetBrains Mono", monospace;
     font-family: var(--main-font);
     color: var(--color-text);
+    fill: var(--color-text);
 }
 
 body {
@@ -28,10 +29,12 @@ h1 {
 a {
     color: var(--color-accent);
     text-decoration: none;
+    transition: all 0.1s linear;
 }
 
 a:hover {
     text-decoration: underline;
+    fill: var(--color-accent);
 }
 
 .comment {
