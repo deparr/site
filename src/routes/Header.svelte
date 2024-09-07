@@ -2,6 +2,8 @@
     // todo: convert logo svg to component
     import dpar from "$lib/images/dpar.svg";
     import Github from "$lib/images/Github.svelte";
+    import MenuIcon from "$lib/images/MenuIcon.svelte";
+    import DropDown from "./DropDown.svelte";
 </script>
 
 <header>
@@ -11,7 +13,7 @@
         </a>
     </div>
 
-    <nav>
+    <nav class="in-drop-down">
         <ul>
             <li>
                 <a href="/#projects">projects</a>
@@ -28,11 +30,14 @@
         </ul>
     </nav>
 
-    <div class="corner">
+    <div class="corner in-drop-down">
         <a href="https://github.com/deparr/portfolio">
             <Github />
         </a>
     </div>
+
+    <MenuIcon />
+    <DropDown />
 </header>
 
 <style>
@@ -115,5 +120,11 @@
     a:hover {
         color: var(--color-accent);
         fill: var(--color-accent);
+    }
+
+    @media(max-width: 800px) {
+        .in-drop-down {
+            display: none;
+        }
     }
 </style>

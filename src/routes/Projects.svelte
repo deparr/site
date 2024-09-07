@@ -7,12 +7,14 @@
 </script>
 
 <section {id}>
-    <h2>Projects</h2>
+    <h2>projects</h2>
     {#each projects as p }
         <div class="project-card" id={p.name}>
             <div class="card-header">
                 <h3>{p.display_name}</h3>
-                <span>|</span>
+                <svg viewBox="0 0 5 10">
+                    <line x1="2.5" y1="0" x2="2.5" y2="10">
+                </svg>
                 <a href={p.repo}>
                     <Github />
                 </a>
@@ -22,7 +24,7 @@
                     <p>{p.desc}</p>
                     <p>{p.timeline}</p>
                 </div>
-                <img src={p.img} alt="[portfolio]">
+                <img class="comment" src={p.img} alt={`[img:${p.name}]`}>
             </div>
         </div>
     {/each}
@@ -38,10 +40,19 @@
 
     img {
         align-self: flex-end;
+        height: 20rem;
+        width: 20rem;
     }
 
     h3 {
         margin: 0;
+        height: auto;
+    }
+
+    svg {
+        stroke: var(--color-text);
+        height: 1.5rem;
+        stroke-width: 1px;
     }
 
     .project-card {

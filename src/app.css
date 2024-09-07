@@ -9,6 +9,7 @@
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
     --main-font: "Berkeley Mono", "JetBrains Mono", monospace;
+    --mobile-width: 800px;
     font-family: var(--main-font);
     color: var(--color-text);
     fill: var(--color-text);
@@ -24,6 +25,7 @@ body {
 h1 {
     font-weight: 400;
     color: var(--color-accent);
+    font-size: 3rem;
 }
 
 a {
@@ -44,4 +46,7 @@ a:hover {
 
 .comment:before {
     content:"// ";
+}
+
+@media (max-width: 800px) {
 }

@@ -39,11 +39,11 @@
         margin: 0 auto;
         margin-top: 1rem;
         padding: 1rem;
-        background-color: var(--color-bg-1);
-        border-radius: 2rem;
-        border-width: 2px;
-        border-color: red;
-        box-shadow: 5px 2px var(--color-bg-2);
+        /* background-color: var(--color-bg-1); */
+        /* border-radius: 2rem; */
+        /* border-width: 2px; */
+        /* border-color: red; */
+        /* box-shadow: 5px 2px var(--color-bg-2); */
     }
 
     @keyframes star-anim {
@@ -53,6 +53,12 @@
 
         100% {
             transform: rotate(360deg);
+        }
+    }
+
+    @media (max-width: 800px) {
+        main {
+            width: 100%;
         }
     }
 </style>
