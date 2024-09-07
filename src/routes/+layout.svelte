@@ -37,9 +37,7 @@
         flex-direction: column;
         box-sizing: border-box;
         margin: 0 auto;
-        margin-top: 1rem;
         padding: 1rem;
-        /* background-color: var(--color-bg-1); */
         /* border-radius: 2rem; */
         /* border-width: 2px; */
         /* border-color: red; */

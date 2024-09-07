@@ -1,15 +1,16 @@
-<script>
-    // todo: convert logo svg to component
+<script lang="ts">
+    // todo: convert logo svg to component or just png ??
     import dpar from "$lib/images/dpar.svg";
     import Github from "$lib/images/Github.svelte";
-    import MenuIcon from "$lib/images/MenuIcon.svelte";
     import DropDown from "./DropDown.svelte";
+
+    let menuOpen = false;
 </script>
 
 <header>
     <div class="logo">
         <a href="/">
-            <img src={dpar} alt="home"/>
+            <img src={dpar} alt="home" />
         </a>
     </div>
 
@@ -18,49 +19,52 @@
             <li>
                 <a href="/#projects">projects</a>
             </li>
-            <li >
+            <li>
                 <a href="/#experience">experience</a>
             </li>
             <li>
                 <a href="/#contact">contact</a>
             </li>
             <li>
-                <a href="/resume.pdf">resume</a>
+                <a href="/resume.pdf" target="_blank">resume</a>
             </li>
         </ul>
     </nav>
 
-    <div class="corner in-drop-down">
-        <a href="https://github.com/deparr/portfolio">
-            <Github />
-        </a>
-    </div>
+    <!-- todo: dont like this structure very much -->
+    <div>
+        <div class="corner in-drop-down">
+            <a href="https://github.com/deparr/portfolio">
+                <Github />
+            </a>
+        </div>
 
-    <MenuIcon />
-    <DropDown />
+        <DropDown bind:isOpen={menuOpen} />
+    </div>
 </header>
 
 <style>
     header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         box-sizing: border-box;
-        /* background-color: var(--color-bg-2); */
+        /* background-color: #0d0d0d; */
         width: 100%;
         padding-bottom: 0.1rem;
         padding-left: 1rem;
         padding-right: 1rem;
-        height: 4em;
+        height: 75px;
     }
 
     .corner {
-		width: 3em;
-		height: 3em;
+        width: 3em;
+        height: 3em;
     }
 
     .logo {
-		width: 3em;
-		height: 3em;
+        width: 3em;
+        height: 3em;
     }
 
     .corner a {
@@ -75,6 +79,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 80%;
     }
 
     ul {
@@ -94,9 +99,8 @@
         padding: 0 1rem;
         height: 100%;
         border-bottom: 2px var(--color-bg-2) solid;
-        transition: border-bottom 0.10s linear;
+        transition: border-bottom 0.1s linear;
     }
-
 
     li:hover {
         border-color: var(--color-text);
@@ -109,7 +113,7 @@
         text-transform: uppercase;
         text-decoration: none;
         color: var(--color-text);
-        transition: all 0.10s linear;
+        transition: all 0.1s linear;
         font-weight: bold;
     }
 
@@ -122,7 +126,7 @@
         fill: var(--color-accent);
     }
 
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
         .in-drop-down {
             display: none;
         }
