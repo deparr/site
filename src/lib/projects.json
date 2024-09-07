@@ -1,0 +1,32 @@
+[
+	{
+		"display_name": "personal portfolio",
+		"name": "portfolio",
+		"desc": "You're here right now! A personal website where I show what I've been up to. For now that's my work experience and projects, though I might start creating write-ups on projects and things I learn.",
+		"tags": ["Svelte","Typescript","Showcase"],
+		"timeline": "Spring 2024",
+		"type": "personal,featured",
+		"repo": "https://github.com/deparr/portfolio",
+        "img": "portfolio.png"
+	},
+	{
+		"display_name": "Chip-8 Interpreter",
+		"name": "chip8",
+		"desc": "A simple Chip-8 interpreter ",
+		"tags": ["SolidJS","Go"],
+		"timeline": "Spring 2024",
+		"type": "personal,featured",
+		"repo": "https://github.com/deparr/portfolio",
+        "img": "portfolio.png"
+	},
+	{
+		"display_name": "Personal Portfolio",
+		"name": "portfolio3",
+		"desc": "A portfolio of myself and my projects",
+		"tags": ["SolidJS","Go"],
+		"timeline": "Spring 2024",
+		"type": "personal,featured",
+		"repo": "https://github.com/deparr/portfolio",
+        "img": "portflio.png"
+	}
+]
