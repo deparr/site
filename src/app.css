@@ -3,11 +3,12 @@
     --color-bg-1: #202020;
     --color-bg-2: #343434;
     --color-text: #c5c8c6;
+    --color-white: #e5e8e6;
     --color-accent: #e78c45;
     --color-low-accent: #a89984;
     --color-error-accent: #cc6666;
-	--column-width: 42rem;
-	--column-margin-top: 4rem;
+    --column-width: 42rem;
+    --column-margin-top: 4rem;
     --main-font: "Berkeley Mono", "JetBrains Mono", monospace;
     --mobile-width: 800px;
     font-family: var(--main-font);
@@ -25,7 +26,18 @@ body {
 h1 {
     font-weight: 400;
     color: var(--color-accent);
-    font-size: 3rem;
+    font-size: 4rem;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 2.7rem;
+    color: var(--color-white);
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 1.8rem;
 }
 
 a {
@@ -44,9 +56,8 @@ a:hover {
     font-style: italic;
 }
 
-.comment:before {
-    content:"// ";
+.comment::before {
+    content: "// ";
 }
 
-@media (max-width: 800px) {
-}
+@media (max-width: 800px) {}

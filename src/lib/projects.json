@@ -1,32 +1,35 @@
 [
 	{
-		"display_name": "personal portfolio",
-		"name": "portfolio",
-		"desc": "You're here right now! A personal website where I show what I've been up to. For now that's my work experience and projects, though I might start creating write-ups on projects and things I learn.",
-		"tags": ["Svelte","Typescript","Showcase"],
-		"timeline": "Spring 2024",
-		"type": "personal,featured",
-		"repo": "https://github.com/deparr/portfolio",
-        "img": "portfolio.png"
-	},
-	{
 		"display_name": "Chip-8 Interpreter",
 		"name": "chip8",
-		"desc": "A simple Chip-8 interpreter ",
-		"tags": ["SolidJS","Go"],
-		"timeline": "Spring 2024",
-		"type": "personal,featured",
-		"repo": "https://github.com/deparr/portfolio",
-        "img": "portfolio.png"
+		"desc": "@html<p>A basic <a href=\"https://wikipedia.org/wiki/CHIP-8\">Chip-8</a> interpreter I wrote to learn more about emulation and SDL.</p>",
+		"tags": ["emulation","rust","sdl"],
+		"timeline": "summer 2024",
+		"type": "personal",
+		"repo": "https://github.com/deparr/chip8",
+        "img": "chip8.png",
+        "display": true
 	},
 	{
-		"display_name": "Personal Portfolio",
-		"name": "portfolio3",
-		"desc": "A portfolio of myself and my projects",
-		"tags": ["SolidJS","Go"],
-		"timeline": "Spring 2024",
-		"type": "personal,featured",
+		"display_name": "tairiki.nvim",
+		"name": "tairiki",
+		"desc": "A neovim colorscheme I created because I couldn't find one I liked.",
+		"tags": ["neovim","lua"],
+		"timeline": "summer 2023",
+		"type": "personal",
+		"repo": "https://github.com/deparr/tairiki.nvim",
+        "img": "tairiki.png",
+        "display": true
+	},
+	{
+		"display_name": "portfolio via ssh",
+		"name": "site-ssh",
+		"desc": "@html<p>This website is also served as a TUI app over ssh! Try it: <pre><code>ssh dparrott.dev<pre><code> !<p>",
+		"tags": ["go","ssh","charm"],
+		"timeline": "summer 2024",
+		"type": "personal",
 		"repo": "https://github.com/deparr/portfolio",
-        "img": "portflio.png"
+        "img": "portfolio-ssh.png",
+        "display": false
 	}
 ]

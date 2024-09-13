@@ -1,13 +1,12 @@
 <script lang="ts">
-    export let height = 24;
-    export let width = 24;
+    export let size = 24;
 </script>
 
 <svg
     role="img"
     aria-label="Link to Github Repo"
-    {height}
-    {width}
+    height={size}
+    width={size}
     version="1.1"
     viewBox="0 0 16 16"
 >

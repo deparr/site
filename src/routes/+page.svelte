@@ -8,13 +8,16 @@
 
 <section>
     <h1>david parrott</h1>
-    <p> welcome to my portfolio!</p>
+    <p>
+        Welcome! Here you can find... something, maybe I'll finish writing this
+        sometime.
+    </p>
     <Projects />
 </section>
 
 <style>
-    section {
-        border: 2px red solid;
+    p {
+        font-size: 1.2rem;
+        padding-left: 1.2rem;
     }
 </style>
-
