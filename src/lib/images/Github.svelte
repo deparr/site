@@ -4,7 +4,7 @@
 
 <svg
     role="img"
-    aria-label="Link to Github Repo"
+    aria-label="link to github repo"
     height={size}
     width={size}
     version="1.1"

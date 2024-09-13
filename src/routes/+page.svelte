@@ -1,5 +1,7 @@
 <script>
     import Projects from "./Projects.svelte";
+    import Contact from "./Contact.svelte";
+    import Experience from "./Experience.svelte";
 </script>
 
 <svelte:head>
@@ -13,6 +15,8 @@
         sometime.
     </p>
     <Projects />
+    <Experience />
+    <Contact />
 </section>
 
 <style>

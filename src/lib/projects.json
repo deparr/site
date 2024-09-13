@@ -24,7 +24,7 @@
 	{
 		"display_name": "portfolio via ssh",
 		"name": "site-ssh",
-		"desc": "@html<p>This website is also served as a TUI app over ssh! Try it: <pre><code>ssh dparrott.dev<pre><code> !<p>",
+		"desc": "@html<p>This website is also served as a TUI app over ssh! Try it: <code>ssh dparrott.dev</code>!<p>",
 		"tags": ["go","ssh","charm"],
 		"timeline": "summer 2024",
 		"type": "personal",

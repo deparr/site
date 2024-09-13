@@ -3,7 +3,7 @@
     --color-bg-1: #202020;
     --color-bg-2: #343434;
     --color-text: #c5c8c6;
-    --color-white: #e5e8e6;
+    --color-text-bright: #e5e8e6;
     --color-accent: #e78c45;
     --color-low-accent: #a89984;
     --color-error-accent: #cc6666;
@@ -32,7 +32,7 @@ h1 {
 h2 {
     font-weight: 400;
     font-size: 2.7rem;
-    color: var(--color-white);
+    color: var(--color-text-bright);
 }
 
 h3 {
@@ -49,6 +49,14 @@ a {
 a:hover {
     text-decoration: underline;
     fill: var(--color-accent);
+}
+
+code {
+    font-family: var(--main-font);
+    background-color: var(--color-bg-1);
+    border: 1px var(--color-bg-2) solid;
+    border-radius: 3px;
+    padding: 0.2rem;
 }
 
 .comment {
