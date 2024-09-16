@@ -10,9 +10,10 @@
 
 <section>
     <h1>david parrott</h1>
+    <p>Welcome! Here you can find a little bit about me and what I get up to.</p>
     <p>
-        Welcome! Here you can find... something, maybe I'll finish writing this
-        sometime.
+        I'm a recent CS grad with special interests in programming languages, developer tools,
+        terminals, and out of necessity: webdev 😢.
     </p>
     <Projects />
     <Experience />
