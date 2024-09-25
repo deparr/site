@@ -27,16 +27,16 @@ var frameAdvanceCmd = func() tea.Msg {
 	})
 }
 
-func (m model) SpinnerView() string {
+func (m model) spinnerView() string {
 	return frames[m.spinnerframe%len(frames)]
 }
 
-func (m model) SpinnerAdvance() (model, tea.Cmd) {
+func (m model) spinnerAdvance() (model, tea.Cmd) {
 	m.spinnerframe += 1
 	return m, nil
 }
 
-func (m model) SpinStartCmd() tea.Cmd {
+func (m model) spinStartCmd() tea.Cmd {
 	return tea.Batch(func() tea.Msg {
 		return SpinnerStartMsg{}
 	},
@@ -44,7 +44,7 @@ func (m model) SpinStartCmd() tea.Cmd {
 	)
 }
 
-func (m model) SpinStopCmd() tea.Cmd {
+func (m model) spinStopCmd() tea.Cmd {
 	return func() tea.Msg {
 		return SpinnerStopMsg{}
 	}

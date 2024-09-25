@@ -5,11 +5,16 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-func (m model) AboutSwitch() (model, tea.Cmd) {
-	m.page = aboutPage
+func (m model) aboutSwitch() (model, tea.Cmd) {
+	m = m.switchPage(aboutPage)
 	return m, nil
 }
 
-func (m model) AboutView() string {
-	return lipgloss.Place(10, 10, lipgloss.Center, lipgloss.Center, "ABOUT")
+func (m model) aboutUpdate(msg tea.Msg) (model, tea.Cmd) {
+	_ = msg
+	return m, nil
+}
+
+func (m model) aboutView() string {
+	return m.renderer.Place(60, 26, lipgloss.Center, lipgloss.Center, "ABOUT")
 }
