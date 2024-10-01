@@ -8,8 +8,10 @@ func (m model) resizeView() string {
 		m.viewportHeight,
 		lipgloss.Center,
 		lipgloss.Center,
-		// todo add a spinner or something here
-		// todo this looks terrible
-		lipgloss.JoinVertical(lipgloss.Center, "your terminal is too small"),
+		lipgloss.JoinVertical(
+			lipgloss.Center,
+			"your terminal is too small",
+			"try >= 80x30",
+		),
 	)
 }

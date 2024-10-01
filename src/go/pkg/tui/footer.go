@@ -16,7 +16,7 @@ func (m model) footerView() string {
 	bold := m.theme.TextAccent().Bold(true).Render
 
 	table := m.theme.Base().
-		Width(m.screenWidth).
+		Width(m.contentWidth).
 		BorderTop(true).
 		BorderStyle(lipgloss.NormalBorder()).
 		BorderForeground(m.theme.Border()).

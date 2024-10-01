@@ -16,5 +16,5 @@ func (m model) experienceUpdate(msg tea.Msg) (model, tea.Cmd) {
 }
 
 func (m model) experienceView() string {
-	return m.renderer.Place(10, 10, lipgloss.Center, lipgloss.Center, "EXPEREINCE")
+	return m.renderer.Place(60, 30, lipgloss.Center, lipgloss.Center, "experience")
 }

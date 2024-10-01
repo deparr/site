@@ -62,17 +62,23 @@ tidy:
 
 .PHONY: res/projects
 pkg/tui/resources/projects.json: ../lib/projects.json
-	cp ../lib/projects.json ./pkg/tui/resources/projects.json
+	cp ../lib/projects.json ./pkg/resource/projects.json
 
-res/projects: pkg/tui/resources/projects.json
+res/projects: pkg/resource/projects.json
+
+.PHONY: res/experience
+pkg/tui/resources/experience.json: ../lib/experience.json
+	cp ../lib/experience.json ./pkg/resource/experience.json
+
+res/experience: pkg/resource/experience.json
 
 .PHONY: build
-build: res/projects
+build: res/projects res/experience
 	# Include additional build steps, like TypeScript, SCSS or Tailwind compilation here...
 	go build -o=/tmp/bin/${binary_name} ${main_package_path}
 
 .PHONY: build/cli
-build/cli: res/projects
+build/cli: res/projects res/experience
 	go build -o=/tmp/bin/${binary_name} ${cli_package_path}
 
 ## run: run the  application

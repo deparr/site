@@ -16,6 +16,8 @@ func (m model) headerUpdate(msg tea.Msg) (model, tea.Cmd) {
 			return m.projectsSwitch()
 		case "e":
 			return m.experienceSwitch()
+		case "x":
+			return m.debugSwitch()
 		case "q":
 			return m, tea.Quit
 		}
@@ -57,7 +59,7 @@ func (m model) headerView() string {
 		Border(lipgloss.NormalBorder()).
 		BorderStyle(m.renderer.NewStyle().Foreground(m.theme.Border())).
 		Row(tabs...).
-		Width(m.screenWidth).
+		Width(m.contentWidth).
 		StyleFunc(func(row, col int) lipgloss.Style {
 			return m.theme.Base().
 				Padding(0, 1).
