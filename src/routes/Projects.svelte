@@ -4,14 +4,12 @@
     import Github from "$lib/images/Github.svelte";
 
     export const id = "projects";
-
-    const htmlPrefix = "@html";
 </script>
 
 <section {id} class="main-section">
     <h2 class="section-header">projects</h2>
     {#each projects as p}
-        {#if p.display }
+        {#if !p.display.includes("ssh") }
         <div class="project-card" id={p.name}>
             <div class="card-header">
                 <h3>{p.display_name.toLowerCase()}</h3>
@@ -24,9 +22,8 @@
             </div>
             <div class="card-body">
                 <img src={p.img} alt={`[img:${p.name}]`} />
-                <!-- todo: this is ok for now but not so great -->
-                {#if p.desc.startsWith(htmlPrefix)}
-                    {@html p.desc.substring(htmlPrefix.length)}
+                {#if p.display.includes("rich")}
+                    {@html p.desc_rich}
                 {:else}
                     <p>{p.desc}</p>
                 {/if}
@@ -55,9 +52,15 @@
         /* aspect-ratio: 1.777; */
         width: 95%;
         height: auto;
+        min-height: 1.4rem;
         border: 2px var(--color-bg-2) solid;
         border-radius: 2px;
+        text-align: center;
     }
+
+    /* img[alt] { */
+    /*     padding: 0.1rem 0rem; */
+    /* } */
 
     h3 {
         margin: 0;
@@ -102,5 +105,6 @@
         align-items: center;
         width: 100%;
         padding: 1rem 0 0;
+        line-height: 1.6rem;
     }
 </style>

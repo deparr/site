@@ -9,9 +9,9 @@
 <section {id}>
     <h2>contact</h2>
     <ul>
-        <li><a href="https://github.com/deparr"><Github size={36}/></a> deparr</li>
-        <li><a href="mailto:david@dparrott.dev"><Email size={36}/></a> david@dparrott.dev</li>
-        <li><a href="https://linkedin.com/in/dparrott"><LinkedIn size={36}/></a> dparrott</li>
+        <li><a href="https://github.com/deparr"><Github size={36}/></a>deparr</li>
+        <li><a href="mailto:david@dparrott.dev"><Email size={36}/></a>david@dparrott.dev</li>
+        <li><a href="https://linkedin.com/in/dparrott"><LinkedIn size={36}/></a>dparrott</li>
     </ul>
 </section>
 

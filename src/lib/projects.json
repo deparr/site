@@ -2,34 +2,37 @@
 	{
 		"display_name": "Chip-8 Interpreter",
 		"name": "chip8",
-		"desc": "@html<p>A basic <a href=\"https://wikipedia.org/wiki/CHIP-8\">Chip-8</a> interpreter I wrote to learn more about emulation and SDL.</p>",
+		"desc": "A basic Chip-8 interpreter I wrote to learn more about emulation and SDL",
+		"desc_rich": "<p>A basic <a href=\"https://wikipedia.org/wiki/CHIP-8\">Chip-8</a> interpreter I wrote to learn more about emulation and SDL.</p>",
 		"tags": ["emulation","rust","sdl"],
 		"timeline": "summer 2024",
 		"type": "personal",
 		"repo": "https://github.com/deparr/chip8",
         "img": "chip8.png",
-        "display": "all"
+        "display": "rich"
 	},
 	{
 		"display_name": "tairiki.nvim",
 		"name": "tairiki",
 		"desc": "A neovim colorscheme I created because I couldn't find one I liked.",
+        "desc_rich": "",
 		"tags": ["neovim","lua"],
 		"timeline": "summer 2023",
 		"type": "personal",
 		"repo": "https://github.com/deparr/tairiki.nvim",
         "img": "tairiki.png",
-        "display": "all"
+        "display": ""
 	},
 	{
 		"display_name": "portfolio via ssh",
 		"name": "site-ssh",
-		"desc": "@html<p>This website is also served as a TUI app over ssh! Try it: <code>ssh dparrott.dev</code>!<p>",
+		"desc": "",
+		"desc_rich": "<p>This website is also served as a TUI app over ssh! Try it: <code>ssh dparrott.dev -p 2222</code>!<p>",
 		"tags": ["go","ssh","charm"],
 		"timeline": "summer 2024",
 		"type": "personal",
 		"repo": "https://github.com/deparr/portfolio",
         "img": "portfolio-ssh.png",
-        "display": "web"
+        "display": "rich,web"
 	}
 ]

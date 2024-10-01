@@ -56,7 +56,7 @@ code {
     background-color: var(--color-bg-1);
     border: 1px var(--color-bg-2) solid;
     border-radius: 3px;
-    padding: 0.2rem;
+    padding: 0.1rem;
 }
 
 .comment {
@@ -66,6 +66,17 @@ code {
 
 .comment::before {
     content: "// ";
+}
+
+.comment a {
+    color: var(--color-low-accent);
+    border-bottom: 1px var(--color-low-accent) solid;
+}
+
+.comment a:hover {
+    color: var(--color-text);
+    border-color: var(--color-text);
+    text-decoration: none;
 }
 
 @media (max-width: 800px) {}
