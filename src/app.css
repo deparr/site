@@ -7,8 +7,6 @@
     --color-accent: #e78c45;
     --color-low-accent: #a89984;
     --color-error-accent: #cc6666;
-    --column-width: 42rem;
-    --column-margin-top: 4rem;
     --main-font: "Berkeley Mono", "JetBrains Mono", monospace;
     --mobile-width: 800px;
     font-family: var(--main-font);
@@ -79,4 +77,49 @@ code {
     text-decoration: none;
 }
 
+@media(prefers-color-scheme: light) {
+    :root {
+        --color-bg-0: #dcdcd6;
+        --color-bg-1: #ccccc6;
+        --color-bg-2: #acaca6;
+        --color-text: #3d3d3c;
+        --color-text-bright: #151515;
+        --color-accent: #e56710;
+        --color-low-accent: #7c5c20;
+        --color-error-accent: #c82829;
+        font-family: var(--main-font);
+        color: var(--color-text);
+        fill: var(--color-text);
+    }
+}
+
 @media (max-width: 800px) {}
+
+@font-face {
+  font-family: "Berkeley Mono";
+  src: url("/fonts/BerkeleyMono-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Berkeley Mono";
+  src: url("/fonts/BerkeleyMono-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Berkeley Mono";
+  src: url("/fonts/BerkeleyMono-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Berkeley Mono";
+  src: url("/fonts/BerkeleyMono-BoldItalic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+}
+
