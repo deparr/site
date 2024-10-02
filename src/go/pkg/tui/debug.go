@@ -27,7 +27,7 @@ func rgba2String(r, g, b, _ uint32) string {
 
 func (m model) debugView() string {
 	header := "DEBUG\n\n"
-	profile := lipgloss.ColorProfile().Name()
+	profile := "profile: " + lipgloss.ColorProfile().Name()
 	dimensions := lipgloss.JoinVertical(
 		lipgloss.Left,
 		"content: "+fmt.Sprintf("%d x %d", m.contentWidth, m.contentHeight),
@@ -41,6 +41,7 @@ func (m model) debugView() string {
 	theme := m.theme
 	colors := lipgloss.JoinVertical(
 		lipgloss.Left,
+		profile,
 		lipgloss.JoinHorizontal(
 			lipgloss.Left,
 			"body: ",
@@ -120,11 +121,9 @@ func (m model) debugView() string {
 		" ",
 	)
 
-
 	return lipgloss.JoinVertical(
 		lipgloss.Left,
 		header,
-		profile,
 		dimensions,
 		colors,
 		faint,
