@@ -21,7 +21,9 @@
                 </a>
             </div>
             <div class="card-body">
-                <img src={p.img} alt={`[img:${p.name}]`} />
+                {#if p.img != ""}
+                    <img src={p.img} alt={`[img:${p.name}]`} />
+                {/if}
                 {#if p.display.includes("rich")}
                     {@html p.desc_rich}
                 {:else}
