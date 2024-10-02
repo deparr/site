@@ -1,6 +1,10 @@
 package tui
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"fmt"
+
+	"github.com/charmbracelet/lipgloss"
+)
 
 func (m model) resizeView() string {
 	return m.renderer.Place(
@@ -10,8 +14,8 @@ func (m model) resizeView() string {
 		lipgloss.Center,
 		lipgloss.JoinVertical(
 			lipgloss.Center,
-			"your terminal is too small",
-			"try >= 80x30",
+			fmt.Sprintf("your terminal is too small (%dx%d)", m.termWidth, m.termHeight),
+			"min is >= 80x30",
 		),
 	)
 }

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-//go:embed projects.json
+//go:embed projects.json experience.json
 var files embed.FS
 
 type project struct {
