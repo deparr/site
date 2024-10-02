@@ -1,8 +1,5 @@
 package main
 
-// An example Bubble Tea server. This will put an ssh session into alt screen
-// and continually print up to date terminal information.
-
 import (
 	"context"
 	"errors"
@@ -19,7 +16,6 @@ import (
 	"github.com/charmbracelet/wish/bubbletea"
 	"github.com/charmbracelet/wish/logging"
 	"github.com/deparr/portfolio/go/pkg/tui"
-	"github.com/muesli/termenv"
 	gossh "golang.org/x/crypto/ssh"
 )
 
@@ -40,7 +36,7 @@ func main() {
 		wish.WithAddress(net.JoinHostPort(host, port)),
 		wish.WithHostKeyPath(".ssh/id_ed25519"),
 		wish.WithMiddleware(
-			bubbletea.MiddlewareWithColorProfile(teaHandler, termenv.TrueColor),
+			bubbletea.Middleware(teaHandler),
 			activeterm.Middleware(), // Bubble Tea apps usually require a PTY.
 			logging.Middleware(),
 		),
@@ -86,7 +82,8 @@ func (s *sshOutput) Fd() uintptr {
 }
 
 func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
-	pty, _, _ := s.Pty()
+	pty, _, a := s.Pty()
+	log.Infof("accepted pty?: %v", a)
 
 	sshPty := &sshOutput{
 		Session: s,
@@ -95,5 +92,5 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 
 	renderer := bubbletea.MakeRenderer(sshPty)
 	model := tui.NewModel(renderer)
-	return model, []tea.ProgramOption{tea.WithAltScreen(), tea.WithMouseAllMotion()}
+	return model, []tea.ProgramOption{tea.WithAltScreen()}
 }
