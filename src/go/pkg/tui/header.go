@@ -10,13 +10,15 @@ func (m model) headerUpdate(msg tea.Msg) (model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
-		case "a":
-			return m.aboutSwitch()
+		case "h":
+			return m.homeSwitch()
+		case "c":
+			return m.contactSwitch()
 		case "p":
 			return m.projectsSwitch()
 		case "e":
 			return m.experienceSwitch()
-		case "x":
+		case "f12":
 			return m.debugSwitch()
 		case "q":
 			return m, tea.Quit
@@ -27,7 +29,6 @@ func (m model) headerUpdate(msg tea.Msg) (model, tea.Cmd) {
 }
 
 func (m model) headerView() string {
-
 	base := m.theme.Base().Render
 	highlight := m.theme.TextHighlight().Render
 	accent := m.theme.TextAccent().Render
@@ -35,24 +36,28 @@ func (m model) headerView() string {
 	logoAccent := m.theme.TextHighlight().Bold(true).Italic(true).Render
 
 	logo := logoAccent("@") + logoBase("dp")
-	about := base("a about")
-	projects := base("p projects")
-	experience := base("e experience")
+	home := accent("h") + base(" home")
+	projects := accent("p") + base(" projects")
+	experience := accent("e") + base(" experience")
+	contact := accent("c") + base(" contact")
 
 	switch m.page {
-	case aboutPage:
-		about = highlight("a") + accent(" about")
+	case homePage:
+		home = accent("h") + highlight(" home")
+	case contactPage:
+		contact = accent("c") + highlight(" contact")
 	case projectsPage:
-		projects = highlight("p") + accent(" projects")
+		projects = accent("p") + highlight(" projects")
 	case experiencePage:
-		experience = highlight("e") + accent(" expereince")
+		experience = accent("e") + highlight(" experience")
 	}
 
 	tabs := []string{
 		logo,
-		about,
+		home,
 		projects,
 		experience,
+		contact,
 	}
 
 	return table.New().

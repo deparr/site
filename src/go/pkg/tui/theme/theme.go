@@ -23,10 +23,10 @@ func BaseTheme(renderer *lipgloss.Renderer) Theme {
 	}
 
 	base.background = lipgloss.AdaptiveColor{Dark: "#151515", Light: "#dcdcd6"}
-	base.body = lipgloss.AdaptiveColor{Dark: "#a5a8a6", Light: "#6d6d6c"}
+	base.body = lipgloss.AdaptiveColor{Dark: "#a5a8a6", Light: "#404040"}
 	base.border = lipgloss.AdaptiveColor{Dark: "#696969", Light: "#696969"}
 	base.highlight = lipgloss.AdaptiveColor{Dark: "#e78c45", Light: "#d05200"}
-	base.accent = lipgloss.AdaptiveColor{Dark: "#e5e8e6", Light: "#2d2d2c"}
+	base.accent = lipgloss.AdaptiveColor{Dark: "#e5e8e6", Light: "#151515"}
 	base.base = lipgloss.NewStyle().Foreground(base.body)
 
 	return base

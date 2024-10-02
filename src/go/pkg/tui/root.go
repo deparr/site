@@ -1,6 +1,8 @@
 package tui
 
 import (
+	"fmt"
+
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
@@ -13,7 +15,7 @@ type size int
 const (
 	splashPage page = iota
 	homePage
-	aboutPage
+	contactPage
 	projectsPage
 	experiencePage
 	debugPage
@@ -32,24 +34,22 @@ type model struct {
 	renderer        *lipgloss.Renderer
 	state           state
 	viewport        viewport.Model
-	viewportWidth   int
-	viewportHeight  int
+	termWidth       int
+	termHeight      int
 	size            size
 	contentWidth    int
 	contentHeight   int
 	containerWidth  int
 	containerHeight int
 	switched        bool
-	hasScroll       bool
 	ready           bool
-	// todo:
-	spinnerframe int
-	spinning     bool
+	hasScroll       bool
 }
 
 type state struct {
-	splash splashState
-	footer footerState
+	splash  splashState
+	footer  footerState
+	spinner spinnerState
 }
 
 func NewModel(renderer *lipgloss.Renderer) tea.Model {
@@ -62,6 +62,7 @@ func NewModel(renderer *lipgloss.Renderer) tea.Model {
 			footer: footerState{
 				binds: []footerBinding{
 					{key: "j/k", action: "scroll"},
+					{key: "q", action: "quit"},
 				},
 			},
 		},
@@ -81,14 +82,14 @@ func (m model) switchPage(newPage page) model {
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		m.viewportWidth = msg.Width
-		m.viewportHeight = msg.Height
+		m.termWidth = msg.Width
+		m.termHeight = msg.Height
 
 		switch {
-		case m.viewportWidth < 80 || m.viewportHeight < 30:
+		case m.termWidth < 80 || m.termHeight < 30:
 			m.size = undersized
-			m.containerWidth = m.viewportWidth
-			m.containerHeight = m.viewportHeight
+			m.containerWidth = m.termWidth
+			m.containerHeight = m.termHeight
 		default:
 			m.size = large
 			m.containerWidth = 80
@@ -97,31 +98,42 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		m.contentWidth = m.containerWidth - 4
 		m = m.updateViewport()
+
+	case tea.KeyMsg:
+		switch msg.String() {
+		case "ctrl+c":
+			return m, tea.Quit
+		}
 	}
 
-	// update
-	var pageCmd tea.Cmd
+	var cmd tea.Cmd
 	switch m.page {
 	case splashPage:
-		m, pageCmd = m.splashUpdate(msg)
-	case aboutPage:
-		m, pageCmd = m.aboutUpdate(msg)
+		m, cmd = m.splashUpdate(msg)
+	case contactPage:
+		m, cmd = m.contactUpdate(msg)
 	case projectsPage:
-		m, pageCmd = m.projectsUpdate(msg)
+		m, cmd = m.projectsUpdate(msg)
 	}
 
 	m, headerCmd := m.headerUpdate(msg)
 	cmds := []tea.Cmd{headerCmd}
 
-	if pageCmd != nil {
-		cmds = append(cmds, pageCmd)
+	if cmd != nil {
+		cmds = append(cmds, cmd)
 	}
 
 	m.viewport.SetContent(m.getContent())
-	m.viewport, pageCmd = m.viewport.Update(msg)
-	cmds = append(cmds, pageCmd)
+	m.viewport, cmd = m.viewport.Update(msg)
+	cmds = append(cmds, cmd)
 
 	m.viewport.SetContent(m.getContent())
+	m.viewport, cmd = m.viewport.Update(msg)
+	if m.switched {
+		m = m.updateViewport()
+		m.switched = false
+	}
+	cmds = append(cmds, cmd)
 
 	return m, tea.Batch(cmds...)
 }
@@ -148,12 +160,6 @@ func (m model) updateViewport() model {
 
 	m.hasScroll = m.viewport.VisibleLineCount() < m.viewport.TotalLineCount()
 
-	if m.hasScroll {
-		m.contentWidth = m.containerWidth - 4
-	} else {
-		m.contentWidth = m.containerWidth - 2
-	}
-
 	return m
 }
 
@@ -168,15 +174,13 @@ func (m model) View() string {
 	default:
 		header := m.headerView()
 		footer := m.footerView()
-		content := m.viewport.View()
 
 		var view string
 		if m.hasScroll {
-			view = lipgloss.JoinHorizontal(
-				lipgloss.Top,
-				content,
-				m.theme.Base().Width(1).Render(), // space between content and scrollbar
-				m.getScrollbar(),
+			view = lipgloss.JoinVertical(
+				lipgloss.Right,
+				m.viewport.View(),
+				m.locView(),
 			)
 		} else {
 			view = m.getContent()
@@ -198,51 +202,44 @@ func (m model) View() string {
 		)
 
 		return m.renderer.Place(
-			m.viewportWidth,
-			m.viewportHeight,
+			m.termWidth,
+			m.termHeight,
 			lipgloss.Center,
 			lipgloss.Center,
 			m.theme.Base().
-				MaxWidth(m.viewportWidth).
-				MaxHeight(m.viewportHeight).
+				MaxWidth(m.termWidth).
+				MaxHeight(m.termHeight).
 				Render(boxedView),
 		)
 	}
 }
 
-func (m model) getScrollbar() string {
+func (m model) locView() string {
+	lines := m.viewport.TotalLineCount()
+	if m.viewport.VisibleLineCount() >= lines {
+		return "ALL"
+	}
 	y := m.viewport.YOffset
-	vh := m.viewport.Height
-	ch := lipgloss.Height(m.getContent())
-	if vh >= ch {
-		return ""
+	percent := int(m.viewport.ScrollPercent() * 100)
+	var view string
+	switch percent {
+	case 0:
+		view = "TOP"
+	case 100:
+		view = "BOT"
+	default:
+		view = fmt.Sprintf("%d%% %d/%d", percent, y, m.viewport.TotalLineCount())
 	}
-
-	height := (vh * vh) / ch
-	maxScroll := ch - vh
-	nYP := 1.0 - (float64(y) / float64(maxScroll))
-	if nYP <= 0 {
-		nYP = 1
-	} else if nYP >= 1 {
-		nYP = 0
-	}
-
-	bar := m.theme.Base().
-		Height(height).
-		Width(1).
-		Background(m.theme.Accent()).
-		Render()
-
-	style := m.theme.Base().Width(1).Height(vh)
-
-	return style.Render(lipgloss.PlaceVertical(vh, lipgloss.Position(nYP), bar))
+	return m.theme.TextAccent().Bold(true).Render(view)
 }
 
 func (m model) getContent() string {
-	content := "none"
+	content := "none :("
 	switch m.page {
-	case aboutPage:
-		content = m.aboutView()
+	case homePage:
+		content = m.homeView()
+	case contactPage:
+		content = m.contactView()
 	case projectsPage:
 		content = m.projectsView()
 	case experiencePage:

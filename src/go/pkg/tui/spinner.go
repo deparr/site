@@ -10,6 +10,11 @@ type SpinnerStartMsg struct{}
 type SpinnerStopMsg struct{}
 type SpinnerFrameMsg struct{}
 
+type spinnerState struct{
+	frame int
+	active     bool
+}
+
 var frames = []string{
 	" ⣷",
 	" ⣯",
@@ -28,11 +33,11 @@ var frameAdvanceCmd = func() tea.Msg {
 }
 
 func (m model) spinnerView() string {
-	return frames[m.spinnerframe%len(frames)]
+	return frames[m.state.spinner.frame%len(frames)]
 }
 
 func (m model) spinnerAdvance() (model, tea.Cmd) {
-	m.spinnerframe += 1
+	m.state.spinner.frame += 1
 	return m, nil
 }
 

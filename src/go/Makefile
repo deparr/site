@@ -61,13 +61,13 @@ tidy:
 ## build: build the application
 
 .PHONY: res/projects
-pkg/tui/resources/projects.json: ../lib/projects.json
+pkg/resource/projects.json: ../lib/projects.json
 	cp ../lib/projects.json ./pkg/resource/projects.json
 
 res/projects: pkg/resource/projects.json
 
 .PHONY: res/experience
-pkg/tui/resources/experience.json: ../lib/experience.json
+pkg/resource/experience.json: ../lib/experience.json
 	cp ../lib/experience.json ./pkg/resource/experience.json
 
 res/experience: pkg/resource/experience.json

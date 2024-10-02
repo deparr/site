@@ -4,8 +4,8 @@ import "github.com/charmbracelet/lipgloss"
 
 func (m model) resizeView() string {
 	return m.renderer.Place(
-		m.viewportWidth,
-		m.viewportHeight,
+		m.termWidth,
+		m.termHeight,
 		lipgloss.Center,
 		lipgloss.Center,
 		lipgloss.JoinVertical(

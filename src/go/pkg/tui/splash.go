@@ -14,7 +14,7 @@ type splashState struct {
 type DelayCompleteMsg struct{}
 
 func (m model) splashInit() tea.Cmd {
-	cmd := tea.Tick(time.Millisecond*100, func(t time.Time) tea.Msg {
+	cmd := tea.Tick(time.Millisecond*1500, func(t time.Time) tea.Msg {
 		return DelayCompleteMsg{}
 	})
 	spin := m.spinStartCmd()
@@ -25,14 +25,14 @@ func (m model) splashUpdate(msg tea.Msg) (model, tea.Cmd) {
 	switch msg.(type) {
 	case DelayCompleteMsg:
 		m.state.splash.delay = true
-		m.spinning = false
+		m.state.spinner.active = false
 	}
 
 	if m.state.splash.delay {
-		return m.projectsSwitch()
+		return m.homeSwitch()
 	}
 
-	if m.spinning {
+	if m.state.spinner.active {
 		return m.spinnerAdvance()
 	}
 
@@ -49,8 +49,8 @@ func (m model) splashView() string {
 	)
 
 	return m.renderer.Place(
-		m.viewportWidth,
-		m.viewportHeight,
+		m.termWidth,
+		m.termHeight,
 		lipgloss.Center,
 		lipgloss.Center,
 		view,

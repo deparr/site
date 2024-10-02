@@ -2,7 +2,7 @@
 	{
 		"display_name": "Chip-8 Interpreter",
 		"name": "chip8",
-		"desc": "A basic Chip-8 interpreter I wrote to learn more about emulation and SDL",
+		"desc": "A basic Chip-8 interpreter I wrote to learn more about emulation and SDL.",
 		"desc_rich": "<p>A basic <a href=\"https://wikipedia.org/wiki/CHIP-8\">Chip-8</a> interpreter I wrote to learn more about emulation and SDL.</p>",
 		"tags": ["emulation","rust","sdl"],
 		"timeline": "summer 2024",
@@ -34,5 +34,17 @@
 		"repo": "https://github.com/deparr/portfolio",
         "img": "portfolio-ssh.png",
         "display": "rich,web"
+	},
+	{
+		"display_name": "Lua 5.4 Interpreter",
+		"name": "zlua",
+		"desc": "A Zig implementation of Lua 5.4. Major work in progress right now, but I'm planning on supporting basic evaluation.",
+		"desc_rich": "<p>A Zig implementation of <a href=\"https://www.lua.org/manual/5.4/manual.html\">Lua 5.4.1</a>. Major work in progress right now, but I'm planning on at least supporting basic evaluation.</p>",
+		"tags": ["zig","lua","interpreters"],
+		"timeline": "summer 2024",
+		"type": "personal",
+		"repo": "https://github.com/deparr/zlua",
+        "img": "zlua.png",
+        "display": "rich"
 	}
 ]
