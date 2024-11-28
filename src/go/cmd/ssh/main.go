@@ -67,30 +67,31 @@ func main() {
 // TODO: this bridge shouldn't be needed anymore, but I still can't get the
 //  colors to work correctly when run as a systemd service
 
-// type sshOutput struct {
-// 	ssh.Session
-// 	tty *os.File
-// }
-//
-// func (s *sshOutput) Write(p []byte) (int, error) {
-// 	return s.Session.Write(p)
-// }
-//
-// func (s *sshOutput) Read(p []byte) (int, error) {
-// 	return s.Session.Read(p)
-// }
-//
-// func (s *sshOutput) Fd() uintptr {
-// 	return s.tty.Fd()
-// }
+type sshOutput struct {
+	ssh.Session
+	tty *os.File
+}
+
+func (s *sshOutput) Write(p []byte) (int, error) {
+	return s.Session.Write(p)
+}
+
+func (s *sshOutput) Read(p []byte) (int, error) {
+	return s.Session.Read(p)
+}
+
+func (s *sshOutput) Fd() uintptr {
+	return s.tty.Fd()
+}
 
 func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
-	// sshPty := &sshOutput{
-	// 	Session: s,
-	// 	tty:     pty.Slave,
-	// }
+	pty,_,_ := s.Pty()
+	sshPty := &sshOutput{
+		Session: s,
+		tty:     pty.Slave,
+	}
 
-	renderer := bubbletea.MakeRenderer(s)
+	renderer := bubbletea.MakeRenderer(sshPty)
 	model := tui.NewModel(renderer)
 	return model, []tea.ProgramOption{tea.WithAltScreen()}
 }
