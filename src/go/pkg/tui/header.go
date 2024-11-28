@@ -30,7 +30,7 @@ func (m model) headerUpdate(msg tea.Msg) (model, tea.Cmd) {
 
 func (m model) headerView() string {
 	base := m.theme.Base().Render
-	highlight := m.theme.TextHighlight().Render
+	highlight := m.theme.TextHighlight().Bold(true).Render
 	accent := m.theme.TextAccent().Render
 	logoBase := m.theme.TextAccent().Bold(true).Italic(true).Render
 	logoAccent := m.theme.TextHighlight().Bold(true).Italic(true).Render
