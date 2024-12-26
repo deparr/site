@@ -7,6 +7,7 @@ fi
 
 output=$(cat "$1")
 for var in "${!VAR_MAP[@]}"; do
+    echo $var
     output=$(printf "%s" "$output" | sed "s|$var|${VAR_MAP[$var]}|g")
 done
 
