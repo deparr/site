@@ -2,6 +2,8 @@
     import Projects from "./Projects.svelte";
     import Contact from "./Contact.svelte";
     import Experience from "./Experience.svelte";
+    
+    export let data;
 </script>
 
 <svelte:head>
@@ -15,7 +17,7 @@
         I'm a recent CS grad with special interests in programming languages, developer tools,
         terminals, and out of necessity: webdev 😢.
     </p>
-    <Projects />
+    <Projects repos={data.projects}/>
     <Experience />
     <Contact />
 </section>
