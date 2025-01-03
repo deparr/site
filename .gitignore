@@ -1,6 +1,7 @@
 node_modules/
 
 static/resume.pdf
+docs/*-vars
 
 .ssh/
 

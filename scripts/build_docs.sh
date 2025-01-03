@@ -12,17 +12,17 @@ declare -A DOC_FILES=(
     ["resume"]="1"
 )
 PREPROCESS="./preprocess.sh"
-VARS="./vars"
 
-cd ../src/docs
+cd docs
 
 for doc in "${!DOC_FILES[@]}"; do 
     echo "building $doc..."
     procname="$doc.typ"
+    varfile="$doc-vars"
     if [[ "${DOC_FILES[$doc]}" ]]; then
         procname="${doc}_out.typ"
         if [[ "${doc}_pre.typ" -nt "$procname" ]]; then
-            $PREPROCESS "${doc}_pre.typ" "$procname" "$VARS" || printf "\tERROR: preprocessing $doc\n\tskipping\n" 
+            $PREPROCESS "${doc}_pre.typ" "$procname" "$varfile" || printf "\tERROR: preprocessing $doc\n\tskipping\n" 
         fi
     fi
 
