@@ -1,41 +1,15 @@
 <script lang="ts">
     import projects from "$lib/projects.json";
+    import RepoShelf from "./RepoShelf.svelte";
 
     import Github from "$lib/images/Github.svelte";
 
     export const id = "projects";
     export let repos;
-
-    console.log(repos)
 </script>
 
 <section {id} class="main-section">
     <h2 class="section-header">projects</h2>
-    <!-- {#each projects as p} -->
-    <!--     {#if !p.display.includes("ssh") } -->
-    <!--     <div class="project-card" id={p.name}> -->
-    <!--         <div class="card-header"> -->
-    <!--             <h3>{p.display_name.toLowerCase()}</h3> -->
-    <!--             <svg viewBox="0 0 5 10"> -->
-    <!--                 <line x1="2.5" y1="0.5" x2="2.5" y2="9.5"> </line></svg -->
-    <!--             > -->
-    <!--             <a href={p.repo} target="_blank" class="repo-link"> -->
-    <!--                 <Github size={30} /> -->
-    <!--             </a> -->
-    <!--         </div> -->
-    <!--         <div class="card-body"> -->
-    <!--             {#if p.img != ""} -->
-    <!--                 <img src={p.img} alt={`[img:${p.name}]`} /> -->
-    <!--             {/if} -->
-    <!--             {#if p.display.includes("rich")} -->
-    <!--                 {@html p.desc_rich} -->
-    <!--             {:else} -->
-    <!--                 <p>{p.desc}</p> -->
-    <!--             {/if} -->
-    <!--         </div> -->
-    <!--     </div> -->
-    <!--     {/if} -->
-    <!-- {/each} -->
     {#each repos.pinned as r}
         <div>
             <h3>{r.name}</h3>

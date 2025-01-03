@@ -45,12 +45,13 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline dotted;
     fill: var(--color-accent);
 }
 
 code {
     font-family: var(--main-font);
+    color: var(--color-text);
     background-color: var(--color-bg-1);
     border: 1px var(--color-bg-2) solid;
     border-radius: 3px;

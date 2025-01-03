@@ -6,7 +6,7 @@
 <p>{$page.error?.message}</p>
 <hr>
 <p>If something doesn't seem right, consider sending me an
-    <a href=https://github.com/deparr/portfolio/issues>issue on Github</a>.
+    <a href=https://github.com/deparr/site/issues>issue on Github</a>.
 </p>
 <p>Thanks!</p>
 
