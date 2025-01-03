@@ -1,4 +1,3 @@
-# portfolio
+personal website
 
-website and bubbletea tui portfolio
-
+tui version - [site-tui](https://github.com/deparr/site-tui)
