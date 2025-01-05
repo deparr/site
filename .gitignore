@@ -1,6 +1,9 @@
 node_modules/
 
 static/resume.pdf
+static/tairiki.png
+static/chip8.png
+static/portfolio-ssh.png
 docs/*-vars
 
 .ssh/
