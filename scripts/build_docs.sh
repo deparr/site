@@ -18,8 +18,8 @@ cd docs
 for doc in "${!DOC_FILES[@]}"; do 
     echo "building $doc..."
     procname="$doc.typ"
-    varfile="$doc-vars"
     if [[ "${DOC_FILES[$doc]}" ]]; then
+        varfile="$doc-vars"
         procname="${doc}_out.typ"
         if [[ "${doc}_pre.typ" -nt "$procname" ]]; then
             $PREPROCESS "${doc}_pre.typ" "$procname" "$varfile" || printf "\tERROR: preprocessing $doc\n\tskipping\n" 

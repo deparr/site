@@ -1,8 +1,5 @@
 <script lang="ts">
-    import projects from "$lib/projects.json";
-    import RepoShelf from "./RepoShelf.svelte";
-
-    import Github from "$lib/images/Github.svelte";
+    import RepoShelf from "$lib/components/RepoShelf.svelte";
 
     export const id = "projects";
     export let repos;
@@ -10,17 +7,8 @@
 
 <section {id} class="main-section">
     <h2 class="section-header">projects</h2>
-    {#each repos.pinned as r}
-        <div>
-            <h3>{r.name}</h3>
-        </div>
-    {/each}
-    <hr>
-    {#each repos.recent as r}
-        <div>
-            <h3>{r.name}</h3>
-        </div>
-    {/each}
+    <RepoShelf id="proj-pinned" title="Github Pinned" repos={repos.pinned} />
+    <RepoShelf id="proj-recent" title="Recently Updated" repos={repos.recent} />
 </section>
 
 <style>
@@ -30,38 +18,6 @@
         flex-direction: column;
         gap: 2rem;
     }
-
-    p {
-        width: 100%;
-        text-align: center;
-    }
-
-    img {
-        color: var(--color-low-accent);
-        font-style: italic;
-        /* aspect-ratio: 1.777; */
-        width: 95%;
-        height: auto;
-        min-height: 1.4rem;
-        border: 2px var(--color-bg-2) solid;
-        border-radius: 2px;
-        text-align: center;
-    }
-
-    /* img[alt] { */
-    /*     padding: 0.1rem 0rem; */
-    /* } */
-
-    h3 {
-        margin: 0;
-        height: auto;
-    }
-
-    /* svg { */
-    /*     stroke: var(--color-text); */
-    /*     height: 1.5rem; */
-    /*     stroke-width: 1px; */
-    /* } */
 
     .repo-link {
         display: flex;

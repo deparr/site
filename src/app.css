@@ -2,13 +2,17 @@
     --color-bg-0: #000;
     --color-bg-1: #202020;
     --color-bg-2: #343434;
+    --color-bg-3: #898989;
     --color-text: #c5c8c6;
     --color-text-bright: #e5e8e6;
     --color-accent: #e78c45;
     --color-low-accent: #a89984;
     --color-error-accent: #cc6666;
+    --color-repo-shelf-bg: #212830;
     --main-font: "Berkeley Mono", "JetBrains Mono", monospace;
+    --font-mono: "Berkeley Mono", "JetBrains Mono", monospace;
     --mobile-width: 800px;
+    --grid-dimensions: 1fr 1fr;
     font-family: var(--main-font);
     color: var(--color-text);
     fill: var(--color-text);
@@ -59,6 +63,7 @@ code {
 }
 
 .comment {
+    font-size: 1rem;
     color: var(--color-low-accent);
     font-style: italic;
 }
@@ -94,7 +99,11 @@ code {
     }
 }
 
-@media (max-width: 800px) {}
+@media (max-width: 800px) {
+    :root {
+        --grid-dimensions: 1fr;
+    }
+}
 
 @font-face {
   font-family: "Berkeley Mono";
