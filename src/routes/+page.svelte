@@ -1,6 +1,5 @@
 <script>
     import Contact from "./Contact.svelte";
-    import Experience from "./Experience.svelte";
     import RepoShelf from "$lib/components/RepoShelf.svelte";
     
     export let data;
@@ -18,16 +17,14 @@
         terminals, graphics, and out of necessity: webdev 😢.
     </p>
 
-    <p></p>
-    <p></p>
-    <p></p>
     <p class="comment">
         *psst* this site is also available as an ssh tui, try <code>ssh tui.dparrott.dev</code>
     </p>
-    <RepoShelf title="Highlighted Repositories" repos={data.projects.pinned}/>
-    <!-- todo is there a better way to have both default and given options -->
-    <RepoShelf title="Recently Updated" repos={data.projects.recent} options={["stars","date"]}/>
-    <Experience />
+    <div id="projects">
+        <RepoShelf title="Highlighted Repositories" repos={data.projects.pinned}/>
+        <!-- todo is there a better way to have both default and given options -->
+        <RepoShelf title="Recently Updated" repos={data.projects.recent} options={["stars","date"]}/>
+    <div>
     <Contact />
 </section>
 

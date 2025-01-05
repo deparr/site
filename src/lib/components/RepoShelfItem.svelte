@@ -22,6 +22,7 @@ var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
             <span>{repo.desc || " "}</span>
         </span>
         {#if options.includes("stars") && repo.stars > 0}
+            <!-- todo star icon -->
             <span>* {repo.stars}</span>
         {/if}
         {#if options.includes("date")}

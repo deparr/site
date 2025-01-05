@@ -10,9 +10,9 @@
 </p>
 <p>Thanks!</p>
 
-<p class="comment">
-    TODO: make this page nice
-</p>
+<!-- <p class="comment"> -->
+<!--     TODO: make this page nice -->
+<!-- </p> -->
 
 <style>
     h1 {

@@ -1,3 +1,4 @@
+<!-- todo remove -->
 <script lang="ts">
     import RepoShelf from "$lib/components/RepoShelf.svelte";
 
@@ -7,8 +8,8 @@
 
 <section {id} class="main-section">
     <h2 class="section-header">projects</h2>
-    <RepoShelf id="proj-pinned" title="Github Pinned" repos={repos.pinned} />
-    <RepoShelf id="proj-recent" title="Recently Updated" repos={repos.recent} />
+    <RepoShelf title="Github Pinned" repos={repos.pinned} />
+    <RepoShelf title="Recently Updated" repos={repos.recent} />
 </section>
 
 <style>

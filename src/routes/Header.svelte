@@ -19,9 +19,9 @@
             <li>
                 <a href="/#projects">projects</a>
             </li>
-            <li>
-                <a href="/#experience">experience</a>
-            </li>
+            <!-- <li> -->
+            <!--     <a href="/#experience">experience</a> -->
+            <!-- </li> -->
             <li>
                 <a href="/#contact">contact</a>
             </li>
@@ -31,7 +31,6 @@
         </ul>
     </nav>
 
-    <!-- todo: dont like this structure very much -->
     <div>
         <div class="corner in-drop-down">
             <a href="https://github.com/deparr/portfolio">
