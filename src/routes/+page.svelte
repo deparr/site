@@ -18,7 +18,7 @@
     </p>
 
     <p class="hint">
-        *psst* this site is also available as an ssh tui try <code class="hint">ssh tui.dparrott.dev</code> !
+        *psst* this site is also available as a tui, try <code class="hint">ssh tui.dparrott.dev</code> !
     </p>
     <div class="section-spacer"></div>
     <section id="projects">
