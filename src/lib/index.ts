@@ -1,1 +1,29 @@
-// place files you want to import through the `$lib` alias in this folder.
+/** 
+ * @param target iso 8601 time
+*/
+export function timeSince(target: string) {
+    const targetTs = Date.parse(target);
+    const diffMs = Date.now() - targetTs;
+
+    const weeks = diffMs / 604800000;
+    if (weeks > 1) {
+        return `${weeks | 0}w`;
+    }
+
+    const days = diffMs / 86400000;
+    if (days > 1) {
+        return `${days | 0}d`;
+    }
+
+    const hours = diffMs / 3600000;
+    if (hours > 1) {
+        return `${hours | 0}h`;
+    }
+
+    const mins = diffMs / 60000;
+    if (mins > 1) {
+        return `${mins | 0}m`;
+    }
+
+    return "now";
+}

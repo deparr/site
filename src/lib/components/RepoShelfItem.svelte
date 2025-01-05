@@ -1,11 +1,10 @@
 <script lang="ts">
+    import Star from "$lib/images/Star.svelte";
+
+    import { timeSince } from "$lib";
+
     export let repo: App.Repository;
     export let options: string[];
-
-    function timeFrom(pushed: string) {
-        // todo human readable date diff (1d, 4h, 1w, etc)
-        return "sometime";
-    }
 </script>
 
 <a
@@ -16,28 +15,27 @@ box-shadow: {repo.language[0]?.color} var(--rshad) var(--rshad),
 var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
     target="_blank"
 >
-    <div>
+    <div class="repo-main">
         <span>
             <h4>{repo.name}</h4>
-            <span>{repo.desc || " "}</span>
         </span>
-        {#if options.includes("stars") && repo.stars > 0}
-            <!-- todo star icon -->
-            <span>* {repo.stars}</span>
-        {/if}
-        {#if options.includes("date")}
-            <span>* {timeFrom(repo.pushed_at)}</span>
-        {/if}
+        <div class="repo-meta">
+            {#if options.includes("stars") && repo.stars > 0}
+                <span class="repo-meta-item"><Star /> <span>{repo.stars}</span></span>
+            {/if}
+            {#if options.includes("date")}
+                <span class="repo-meta-item">{timeSince(repo.pushed_at)}</span>
+            {/if}
+        </div>
     </div>
+    <span class="repo-description">{repo.desc || " "}</span>
     <span class="language-bar-wrap">
         <span class="language-bar">
             {#each repo.language as l}
-                {#if l.percent > 2}
-                    <span
-                        class="language-bar-item"
-                        style="flex-grow: {l.percent}; background-color: {l.color}"
-                    ></span>
-                {/if}
+                <span
+                    class="language-bar-item"
+                    style="flex-grow: {l.percent}; background-color: {l.color}"
+                ></span>
             {/each}
         </span>
     </span>
@@ -47,6 +45,7 @@ var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
     .shelf-item {
         --rshad: 0rem;
         color: var(--color-text-bright);
+        fill: var(--color-text);
         text-decoration: none;
         background-color: var(--color-bg-0);
         border-radius: 0.5rem;
@@ -67,8 +66,33 @@ var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
 
     h4 {
         font-size: 1.2rem;
+        margin-bottom: 0px;
         margin-top: 0px;
-        margin-bottom: 0.4rem;
+    }
+
+    .repo-main {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+    }
+
+    .repo-meta {
+        color: var(--color-text);
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        filter: brightness(80%);
+    }
+
+    .repo-meta-item {
+        display: flex;
+        column-gap: 0.4rem;
+        align-items: center;
+        line-height: 1.25rem;
+    }
+
+    .repo-description {
+        max-width: 90%;
     }
 
     .language-bar-wrap {
