@@ -1,5 +1,6 @@
 import { API_URL } from "$env/static/private"
 
+// todo actually care about errors
 export async function getGhPinned() {
     let res = await fetch(`${API_URL}/gh/pinned`);
     let data = await res.json();

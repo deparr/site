@@ -9,8 +9,8 @@
     --color-low-accent: #a89984;
     --color-error-accent: #cc6666;
     --color-repo-shelf-bg: #212830;
-    --main-font: "Berkeley Mono", "JetBrains Mono", monospace;
-    --font-mono: "Berkeley Mono", "JetBrains Mono", monospace;
+    --main-font: "JetBrains Mono", monospace;
+    --font-mono: "JetBrains Mono", monospace;
     --mobile-width: 800px;
     --grid-dimensions: 1fr 1fr;
     font-family: var(--main-font);
@@ -28,18 +28,18 @@ body {
 h1 {
     font-weight: 400;
     color: var(--color-accent);
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 h2 {
     font-weight: 400;
-    font-size: 2.7rem;
+    font-size: 1.7rem;
     color: var(--color-text-bright);
 }
 
 h3 {
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
 }
 
 a {
@@ -54,33 +54,13 @@ a:hover {
 }
 
 code {
-    font-family: var(--main-font);
-    color: var(--color-text);
-    background-color: var(--color-bg-1);
-    border: 1px var(--color-bg-2) solid;
-    border-radius: 3px;
-    padding: 0.1rem;
-}
-
-.comment {
-    font-size: 1rem;
+    font-variant-ligatures: none;
+    font-size: 0.85rem;
     color: var(--color-low-accent);
-    font-style: italic;
 }
 
-.comment::before {
-    content: "// ";
-}
-
-.comment a {
-    color: var(--color-low-accent);
-    border-bottom: 1px var(--color-low-accent) solid;
-}
-
-.comment a:hover {
-    color: var(--color-text);
-    border-color: var(--color-text);
-    text-decoration: none;
+.section-spacer {
+    padding: 1rem 0;
 }
 
 @media(prefers-color-scheme: light) {
@@ -93,6 +73,9 @@ code {
         --color-accent: #e56710;
         --color-low-accent: #7c5c20;
         --color-error-accent: #c82829;
+        --main-font: "JetBrains Mono", monospace;
+        --mobile-width: 800px;
+        --grid-dimensions: 1fr 1fr;
         font-family: var(--main-font);
         color: var(--color-text);
         fill: var(--color-text);
@@ -106,30 +89,34 @@ code {
 }
 
 @font-face {
-  font-family: "Berkeley Mono";
-  src: url("/fonts/BerkeleyMono-Regular.woff2") format("woff2");
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
   font-weight: normal;
+  font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Berkeley Mono";
-  src: url("/fonts/BerkeleyMono-Bold.woff2") format("woff2");
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
   font-weight: bold;
+  font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Berkeley Mono";
-  src: url("/fonts/BerkeleyMono-Italic.woff2") format("woff2");
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Italic.woff2") format("woff2");
   font-weight: normal;
+  font-display: swap;
   font-style: italic;
 }
 
 @font-face {
-  font-family: "Berkeley Mono";
-  src: url("/fonts/BerkeleyMono-BoldItalic.woff2") format("woff2");
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-BoldItalic.woff2") format("woff2");
   font-weight: bold;
+  font-display: swap;
   font-style: italic;
 }
 

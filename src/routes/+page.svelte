@@ -11,20 +11,22 @@
 
 <section>
     <h1>david parrott</h1>
-    <p>Welcome! Here you can find a little bit about me and what I get up to.</p>
+    <p><strong>Welcome!<strong></p>
     <p>
         I'm a recent CS grad interested in programming languages, developer tools,
-        terminals, graphics, and out of necessity: webdev 😢.
+        terminals, and graphics. Here you'll find a litte bit about my current projects and, eventually, some blog posts.
     </p>
 
-    <p class="comment">
-        *psst* this site is also available as an ssh tui, try <code>ssh tui.dparrott.dev</code>
+    <p class="hint">
+        *psst* this site is also available as an ssh tui try <code class="hint">ssh tui.dparrott.dev</code> !
     </p>
-    <div id="projects">
+    <div class="section-spacer"></div>
+    <section id="projects">
         <RepoShelf title="Highlighted Repositories" repos={data.projects.pinned}/>
         <!-- todo is there a better way to have both default and given options -->
         <RepoShelf title="Recently Updated" repos={data.projects.recent} options={["stars","date"]}/>
-    <div>
+    </section>
+    <div class="section-spacer"></div>
     <Contact />
 </section>
 
@@ -32,5 +34,15 @@
     p {
         font-size: 1.2rem;
         padding-left: 1.2rem;
+    }
+
+    code {
+        font-size: 1.05rem;
+    }
+
+    .hint {
+        font-size: 1.0rem;
+        margin-top: 2rem;
+
     }
 </style>

@@ -10,10 +10,6 @@
 </p>
 <p>Thanks!</p>
 
-<!-- <p class="comment"> -->
-<!--     TODO: make this page nice -->
-<!-- </p> -->
-
 <style>
     h1 {
         color: var(--color-error-accent);

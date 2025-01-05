@@ -15,7 +15,7 @@
             <p>{e.desc}</p>
         </div>
     {/each}
-    <p class="comment resume-tag">for more detailed info, check my <a href="/resume.pdf">resume</a></p>
+    <p class="resume-tag">for more detailed info, check my <a href="/resume.pdf">resume</a></p>
 </section>
 
 <style>
