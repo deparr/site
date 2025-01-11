@@ -167,7 +167,6 @@
   ],
 )
 
-// TODO get rid of this text size swapping
 #set text(size: 13pt)
 == Education
 #edu("Brigham Young University", "Bachelor of Science, Computer Science",

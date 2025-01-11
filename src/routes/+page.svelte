@@ -22,9 +22,8 @@
     </p>
     <div class="section-spacer"></div>
     <section id="projects">
-        <RepoShelf title="Highlighted Repositories" repos={data.projects.pinned}/>
-        <!-- todo is there a better way to have both default and given options -->
-        <RepoShelf title="Recently Updated" repos={data.projects.recent} options={["stars","date"]}/>
+        <RepoShelf title="Highlighted Repositories" repos={pinned}/>
+        <RepoShelf title="Recently Updated" repos={recent} date={true}/>
     </section>
     <div class="section-spacer"></div>
     <Contact />

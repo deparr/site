@@ -41,10 +41,9 @@
 </button>
 <div id="drop-down" class="drop-down {isOpen ? 'open' : 'close'}">
     <a href="/#projects" on:click={closeMenu}>projects</a>
-    <a href="/#experience" on:click={closeMenu}>experience</a>
     <a href="/#contact" on:click={closeMenu}>contact</a>
     <a href="/resume.pdf" target="_blank" on:click={closeMenu}>resume</a>
-    <a href="https://github.com/deparr/portfolio">
+    <a href="https://github.com/deparr/site">
         <Github />
     </a>
 </div>

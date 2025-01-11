@@ -1,9 +1,13 @@
 /** 
  * @param target iso 8601 time
+ * @returns human readable
 */
-export function timeSince(target: string) {
+export function timeSince(target: string): string {
     const targetTs = Date.parse(target);
     const diffMs = Date.now() - targetTs;
+    if (isNaN(diffMs)) {
+        return ""
+    }
 
     const weeks = diffMs / 604800000;
     if (weeks > 1) {

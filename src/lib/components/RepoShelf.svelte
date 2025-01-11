@@ -2,14 +2,20 @@
     import RepoShelfItem from "./RepoShelfItem.svelte";
     export let title: string;
     export let repos: Array<App.Repository>;
-    export let options: string[] = ["stars"];
+    export let stars: boolean = true;
+    export let date: boolean = false;
+
+    let options = {
+        stars,
+        date,
+    };
 </script>
 
 <div>
     <h2>{title}</h2>
     <div class="repo-shelf">
     {#each repos as repo}
-        <RepoShelfItem {repo} {options}/>
+        <RepoShelfItem {repo} {options} />
     {/each}
     </div>
 </div>

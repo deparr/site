@@ -4,14 +4,18 @@
     import { timeSince } from "$lib";
 
     export let repo: App.Repository;
-    export let options: string[];
+    export let options: {stars: boolean, date: boolean};
+
+    // if a repo has lang info, it will always have at least one language
+    const defaultColor = "#ff8000";
+    const majorityLangColor = repo.language?.at(0)?.color || defaultColor;
 </script>
 
 <a
     href={repo.url}
     class="shelf-item"
     style="
-box-shadow: {repo.language[0]?.color} var(--rshad) var(--rshad),
+box-shadow: {majorityLangColor} var(--rshad) var(--rshad),
 var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
     target="_blank"
 >
@@ -20,23 +24,32 @@ var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
             <h4>{repo.name}</h4>
         </span>
         <div class="repo-meta">
-            {#if options.includes("stars") && repo.stars > 0}
-                <span class="repo-meta-item"><Star /> <span>{repo.stars}</span></span>
-            {/if}
-            {#if options.includes("date")}
+            {#if options.date}
                 <span class="repo-meta-item">{timeSince(repo.pushed_at)}</span>
+            {/if}
+            {#if options.stars && repo.stars > 0}
+                <span class="repo-meta-item">
+                    <Star /> <span>{repo.stars}</span>
+                </span>
             {/if}
         </div>
     </div>
     <span class="repo-description">{repo.desc || " "}</span>
     <span class="language-bar-wrap">
         <span class="language-bar">
-            {#each repo.language as l}
+            {#if !repo.language}
                 <span
                     class="language-bar-item"
-                    style="flex-grow: {l.percent}; background-color: {l.color}"
+                    style="flex-grow: 0; background-color: {defaultColor}"
                 ></span>
-            {/each}
+            {:else}
+                {#each repo.language as l}
+                    <span
+                        class="language-bar-item"
+                        style="flex-grow: {l.percent || 0}; background-color: {l.color}"
+                    ></span>
+                {/each}
+            {/if}
         </span>
     </span>
 </a>
@@ -81,12 +94,13 @@ var(--color-bg-3) calc(-1*var(--rshad)) calc(-1*var(--rshad));"
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
+        column-gap: 0.8rem;
         filter: brightness(80%);
     }
 
     .repo-meta-item {
         display: flex;
-        column-gap: 0.4rem;
+        column-gap: 0.2rem;
         align-items: center;
         line-height: 1.25rem;
     }
