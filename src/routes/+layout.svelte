@@ -1,6 +1,15 @@
-<script>
-    import Header from "./Header.svelte";
+<script lang="ts">
     import "../app.css";
+    import Header from "./Header.svelte";
+    // import Toast from "$lib/components/Toast.svelte";
+
+    // import type { ToastOptions } from "$lib/stores/toast";
+    // import toastStore from "$lib/stores/toast";
+
+    // let toast: ToastOptions | null;
+    // toastStore.subscribe((value) => {
+    //     toast = value;
+    // });
 </script>
 
 <div class="app">
@@ -9,6 +18,10 @@
         <slot />
     </main>
 </div>
+
+<!-- {#if toast} -->
+<!--     <Toast options={toast} /> -->
+<!-- {/if} -->
 
 <style>
     .app {

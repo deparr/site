@@ -1,8 +1,19 @@
-<script>
+<script lang="ts">
     import Contact from "./Contact.svelte";
     import RepoShelf from "$lib/components/RepoShelf.svelte";
+    // import { showToast } from "$lib/stores/toast";
     
     export let data;
+
+    let pinned = data.projects?.pinned || [];
+    let recent = data.projects?.recent || [];
+
+    // function createToast() {
+    //     showToast({
+    //         message: "This is a test toast notification",
+    //         duration: 2000,
+    //     });
+    // }
 </script>
 
 <svelte:head>
