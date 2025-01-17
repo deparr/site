@@ -42,12 +42,12 @@
 
 <style>
     p {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         padding-left: 1.2rem;
     }
 
     code {
-        font-size: 1.05rem;
+        font-size: 1.1rem;
     }
 
     .hint {
