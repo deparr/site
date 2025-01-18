@@ -21,6 +21,7 @@ declare global {
             pushed_at: string;
             language: RepoLang[];
             stars: number;
+            forks: number;
         };
     }
 }
