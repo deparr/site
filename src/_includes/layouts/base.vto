@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+    {{# might put the head tag in a separate component #}}
+    <head>
+    <meta charset="utf-8">
+    <title>{{ it.title }}</title>
+    <meta name="description" content="{{description}}">
+    <meta name="viewport" content="width=device-width, inital-scale=1">
+
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+    <script src="/js/theme.js"></script>
+    </head>
+
+    <body>
+        <div id="main">
+            {{ include "components/navbar.vto" }}
+            {{ content }}
+            {{ include "components/footer.vto" }}
+        <div>
+    </body>
+
+</html>

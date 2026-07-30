@@ -1,0 +1,34 @@
+url = "/"
+displayed_projects = [
+ { name = "gdfmt", icon = "github", gitlink = "deparr/gdfmt", description = """
+An attempt at making a formatter for Godot gdscript. The goal is adhere to the [offcial styleguide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
+while allowing for some options like quote style. Written in Zig, because why not?
+ """ },
+
+ { name = "jolt.nvim", icon = "github", gitlink = "deparr/jolt.nvim", description = """
+A plugin that turns Neovim into a static site generator with [djot.lua](https://github.com/jgm/djot.lua)
+It uses treesitter to accurately highlight codeblocks.
+
+- [Building Static Sites with Neovim](/blog/neovim-static-sites)
+ """ },
+
+ { name = "site-tui", icon = "github", gitlink = "deparr/site-tui", description = """
+Serving my portfolio website over ssh using [wish](https://github.com/charmbracelet/wish).
+It used to be up on `tui.dparrott.dev`, but you can see a demo of it [here](/img/site_tui.gif).
+I still think using ssh for more that _just_ remote shell access is cool though, so I might get it eventually get it working again.
+ """ },
+
+ { name = "boids", icon = "github", gitlink = "deparr/boids", description = """
+A simple flocking simulation in Godot. Based on the flocks described in this [paper](https://www.cs.toronto.edu/~dt/siggraph97-course/cwr87).
+It was also a way to learn the basics of using compute shaders in Godot.
+
+Check it out [here.](/boids)
+ """ },
+
+ { name = "chip-8", icon = "github", gitlink = "deparr/chip8z", description = """
+A bytecode interpreter style emulator for the [chip-8 system](https://en.wikipedia.org/wiki/CHIP-8)
+I wrote it to learn more about emulation and a bit of SDL. It's not 100% accurate, the timing is a little off
+and sprites don't always wrap around edges cleanly, but it can play most roms.
+Emulators are a really interesting topic and something I'd like to take a proper deep dive into eventually.
+ """ },
+]

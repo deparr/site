@@ -1,0 +1,14 @@
++++
+layout = "layouts/default.vto"
++++
+
+<ul class="post-list">
+{{ for page of search.pages("post", "date=desc") }}
+<li id={{ page.url.split("/").filter((x)=>x.length).pop()}}>
+    <time class="text-alt">{{ page.date |> date("MMMM d, y") }}</time>
+    <h2>
+        <a class="text-grad" href={{ page.url }}>{{ page.title }}</a>
+    </h2>
+</li>
+{{ /for }}
+</ul>

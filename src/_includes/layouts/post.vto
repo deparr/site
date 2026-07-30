@@ -1,0 +1,10 @@
+---
+layout: layouts/default.vto
+---
+
+<div class="title-card">
+    <h1 class="text-grad">{{ page.data.title }}</h1>
+    <time class="text-alt">{{ page.data.date |> date("MMMM d, y") }}</time>
+</div>
+<hr />
+{{ content }}

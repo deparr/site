@@ -1,0 +1,23 @@
+<h1 class="text-grad">Welcome!</h1>
+
+<p>
+I'm David, a programmer interested in programming languages, developer
+tools, terminals, and graphics. Here you'll find a bit about me, my projects,
+and maybe some related writing.
+</p>
+
+<ul>
+    <li>Email: <a href="mailto:blog@dparrott.dev">david@dparrott.dev</a></li>
+    <li>Github: <a href="https://github.com/deparr" target="_blank">deparr</a></li>
+    {{# <li>Resume: <a href="/resume.pdf" target="_blank">pdf</a></li> #}}
+</ul>
+
+<h2 class="text-grad">Projects</h2>
+
+{{ for p of displayed_projects }}
+    <h3> {{p.name}}
+    <a style="display:inline-flex;align-items:center;" target="_blank" href={{`https://github.com/${p.gitlink}`}}>
+    <svg class="icon"><use href={{`/img/icons.svg#${p.icon}`}} /></svg></a></h3>
+    {{ p.description |> dj }}
+{{ /for }}
+

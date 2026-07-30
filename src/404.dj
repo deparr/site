@@ -1,0 +1,11 @@
++++
+title = "Not Found"
+description = "Not all who wander are lost"
+layout = "layouts/default.vto"
++++
+
+# [Page Not Found]{.text-grad}
+
+---
+
+[Go back home](/)

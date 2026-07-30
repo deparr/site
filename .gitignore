@@ -1,0 +1,8 @@
+_site
+_cache
+.env
+.wrangler
+
+plugins/ts_highlight/parsers/*.wasm
+plugins/ts_highlight/queries/*.scm
+src/assets/boids/*
