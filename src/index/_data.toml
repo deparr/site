@@ -1,7 +1,7 @@
 url = "/"
 displayed_projects = [
  { name = "gdfmt", icon = "github", gitlink = "deparr/gdfmt", description = """
-An attempt at making a formatter for Godot gdscript. The goal is adhere to the [offcial styleguide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
+An attempt at making a formatter for Godot gdscript. The goal is adhere to the [official styleguide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
 while allowing for some options like quote style. Written in Zig, because why not?
  """ },
 

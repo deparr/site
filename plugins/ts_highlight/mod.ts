@@ -151,7 +151,8 @@ export function wrapAndHighlightCode(raw: string, lang: string | undefined): str
     const { rendered: rendered_lines, styles } = highlightCode(raw, lang);
     usedHighlights = usedHighlights.union(styles);
     const rendered = rendered_lines.join("\n").trim();
-    return rendered;
+    if (lang) return `<pre><code class="${lang}">${rendered}</code></pre>`;
+    return `<pre><code>${rendered}</pre></code>`;
 }
 
 function getHlOverride(name: string, theme: "light"|"dark"): HighlightDef {

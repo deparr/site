@@ -57,11 +57,6 @@ export const overrides: Visitor<HTMLRenderer, string> = {
         return r.renderAstNodeDefault(node);
     },
     code_block: (node: CodeBlock, r: HTMLRenderer) => {
-        const code = wrapAndHighlightCode(node.text.trim(), node.lang);
-        if (node.lang) {
-            return `<pre><code class="${node.lang}">${code}</code></pre>`;
-        } else {
-            return `<pre><code>${code}</pre></code>`;
-        }
+        return wrapAndHighlightCode(node.text.trim(), node.lang);
     },
 };

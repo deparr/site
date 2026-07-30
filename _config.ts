@@ -12,7 +12,7 @@ import { filters, overrides } from "./plugins/djot/filters.ts";
 const site = lume({ src: "./src" })
     .use(djot({ filters, renderOptions: { overrides } }))
     .use(ts_highlight())
-    .use(esbuild())
+    .use(esbuild({ extensions: [".ts", ".tsx"]}))
     .use(date())
     .use(extractDate())
     .add("assets", ".")
