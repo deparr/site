@@ -10,7 +10,7 @@
     --border: black;
     --border-code: #696969;
     --shadow: 0, 0, 0;
-    --transition: 0.4s cubic-bezier(0.85, 0, 0.15, 1);
+    --transition: 0.25s cubic-bezier(0.85, 0, 0.15, 1);
     --noise-opacity: 0.024;
 }
 
@@ -116,12 +116,14 @@ body::before {
     margin: 0 auto;
     flex-direction: column;
     background-color: var(--bg);
-    border: solid var(--text-alt) 2px;
-    border-radius: 4px;
+    border: solid var(--border) 1px;
+    box-shadow: 4px 4px var(--border);
+    /* border: solid var(--text-alt) 2px; */
+    /* border-radius: 4px; */
     padding: 1em;
-    box-shadow:
-        0 2px 4px rgba(var(--shadow), 0.12),
-        0 8px 16px rgba(var(--shadow), 0.08);
+    /* box-shadow: */
+    /*     0 2px 4px rgba(var(--shadow), 0.12), */
+    /*     0 8px 16px rgba(var(--shadow), 0.08); */
 }
 
 nav {
@@ -221,6 +223,10 @@ h1, h2, h3 {
     line-height: 1rem;
 }
 
+/* h1::before, h2::before, h3::before { */
+/*     border-left: solid 1px var(--border); */
+/* } */
+
 h1 { font-size: 2.0rem; }
 h2 { font-size: 1.4rem;}
 h3 { font-size: 1.2rem; }
@@ -276,12 +282,10 @@ svg.icon {
 }
 
 button#theme-toggle {
-    background: none;
-    border: none;
     padding: 0;
     font: inherit;
     cursor: pointer;
-    
+
     color: var(--text);
     text-decoration-line: underline;
     text-decoration-color: var(--link);
@@ -290,7 +294,6 @@ button#theme-toggle {
 svg.toggle-icon {
     width: 1.4rem;
     height: 1.4rem;
-    stroke: var(--text);
 }
 
 
@@ -339,15 +342,6 @@ svg.toggle-icon {
     font-size: 0.9rem;
 }
 
-.clickbait-title {
-    font-style: italic;
-    opacity: 0.8;
-}
-
-.clickbait-title::before {
-    content: "clickbait title: ";
-}
-
 .post-list {
     list-style: none;
     margin-left: 0;
@@ -379,6 +373,36 @@ svg.toggle-icon {
     margin-top: 1rem;
 }
 
+.depth-button {
+    border: solid var(--border) 1px;
+    box-shadow: 4px 4px var(--border);
+    padding: 0.4rem 1.0rem;
+}
+
+.depth-button:hover {
+    /* transform: translate(4px, 4px); */
+    box-shadow: 0x 0px var(--border);
+}
+
+.flat-button {
+    border: solid var(--border) 1px;
+    padding: 0.4rem 1.0rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    min-width: 2.25rem;
+    background-color: var(--bg);
+    stroke: var(--text);
+}
+
+.flat-button:hover {
+    background-color: var(--border);
+    color: var(--bg);
+    fill: var(--bg);
+    stroke: var(--bg);
+}
+
 /* colors */
 .accent { color: var(--accent); }
 .error { color: var(--error); }
@@ -387,8 +411,8 @@ svg.toggle-icon {
 .text { color: var(--text); }
 
 @media (max-width: 800px) {
-    main {
-        max-width: 100%;
+    #main {
+        max-width: 94%;
     }
 }
 
