@@ -408,11 +408,13 @@ svg.toggle-icon {
 blockquote.callout {
     padding-left: 1em;
     border-left: 4px solid var(--error);
+    font-style: italic;
 }
 
 blockquote.aside {
     padding-left: 1em;
     border-left: 4px solid var(--link);
+    font-style: italic;
 }
 
 /* colors */
