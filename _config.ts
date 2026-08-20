@@ -17,7 +17,7 @@ const site = lume({ src: "./src", location: new URL("https://dparrott.dev") })
     .use(date())
     .use(extractDate())
     .use(feed({
-        output: ["/feed.rss"],
+        output: ["/feed.xml"],
         query: "post",
         info: {
             title: "=site.title",

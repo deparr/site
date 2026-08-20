@@ -1,3 +1,6 @@
 title = "deparr"
 layout = "layouts/default.vto"
 
+[site]
+title = "deparr"
+description = "A tech(?) blog"
