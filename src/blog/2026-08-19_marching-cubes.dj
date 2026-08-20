@@ -1,0 +1,379 @@
++++
+title = "Godot Procgen: Marching Cubes"
+description = ""
+tags = ["post", "godot", "graphics", "procgen"]
++++
+
+{.callout}
+> Note: This isn't exactly a tutorial. It's more of a "I worked
+> through this thing and want to write about what I learned", and this
+> writing style was the easiest for my atrophied writing skills lol.
+>
+> If you're here for info on marching cubes, consider checking the [references](#references) instead.
+
+I want to learn more about 3D graphics procedural terrain generation, so...
+
+let's take a look at Marching Cubes!
+
+![top down view of marching cubes terrain](/img/mc_header.png)
+
+## Marching Cubes
+
+Marching cubes is a relatively simple mesh construction algorithm first developed in [1987](https://people.eecs.berkeley.edu/~jrs/meshpapers/LorensenCline.pdf)
+to visualize medical scans, but it can be applied to any kind of 3D scalar field.
+
+The data is sampled through a grid of cubical voxels, once for each voxel corner.
+Voxel size is arbitrary, but it does determine the fidelity of the final mesh.
+The sampled values are compared against the surface threshold; points less than the threshold
+are underneath the mesh surface[^surface-convention]. All other points are above it. The core
+of the algorithm is constructing triangles within the voxel that separate corners
+on different sides of the threshold.
+
+[^surface-convention]: This is arbitrary, you can interpret it either way.
+The key idea is the isosurface cuts through edges that cross the surface isolevel
+
+
+Let's look at an example. Given the following vertex and edge ids...
+
+![wireframe cube with labeled vertexes](/img/mc_voxel_verts.png)
+![wireframe cube with labeled edges](/img/mc_voxel_edges.png)
+
+Let's say verts `1` , `5` , and `7` have low densities and are _inside_ the mesh.
+This means we should create triangles from edges `5, 0, 1`, `5, 4, 0`, and `7, 6, 11`:
+
+![wireframe cube with extra triangles inside](/img/mc_voxel_tris.png)
+
+How do we know that? Intuitively, we know the mesh will slice through edges
+that cross the surface threshold, separating low and high densities. So we place
+one triangle in front of `v7`, and a two triangle quad in front of `v1` and `v5`.
+
+Programmatically, we know we have eight corners with two possible states each,
+giving us 256 possible combinations. So we can identify each case by building
+an 8-bit integer from our corners. We could go through the trouble of working
+out each case by hand, but fortunately, developers in the 80s have already
+done this work for us. Our example voxel generates an index of  `10100010` (162),
+and looking in the table, we see three triangles: `5, 0, 1`, `5, 4, 0`, and `7, 6, 11`.
+
+## Godot Implementation
+
+Now that we sort of know what we're doing, let's jump into Godot!
+
+We start with a 3D scene and add a single `MeshInstance3D` with the following _tool script_.
+All we're doing is generating a single mesh, so we don't really need to start up a
+new godot process each time. Using the editor is fine.
+
+{-Plus, this way we can use the inspector and save ourselves from having to write ui code.-}
+
+```gdscript
+@tool
+extends MeshInstance3D
+
+# some tool buttons so we don't have to manually reload the scene
+# or reset our mesh
+@export_tool_button("Generate", "Bake")
+var gen_mesh_button := regenerate_mesh
+
+@export_tool_button("Clear", "CurveDelete")
+var clear_mesh_button := clear_mesh
+
+# this is the size of our sample grid
+# our voxel grid will be sample_dim - Vector3i(1)
+@export var sample_dim := Vector3i(2, 2, 2)
+# how much of our density field we consider above the surface
+@export var surface_level := 0.0:
+@export var noise: NoiseTexture3D
+
+var terrain_mesh := ArrayMesh.new()
+var terrain_verts := PackedVector3Array()
+var terrain_normals := PackedVector3Array()
+
+func _ready() -> void:
+	self.mesh = terrain_mesh
+
+func regenerate_mesh() -> void:
+	pass
+
+func density(ws: Vector3) -> float:
+	return 0.0
+
+func clear_mesh() -> void:
+	terrain_mesh.clear_surfaces()
+	terrain_verts.clear()
+	terrain_normals.clear()
+```
+
+Be sure to reload the scene at least once to load the tool script.
+
+To implement `regenerate_mesh()` we need to do the following:
+
+- generate some data to sample, we'll use a 3d noise texture
+- iterate over all voxels in the space:
+
+    - sample each corner to build our case number
+    - identify which edges the triangles will touch
+    - calculate the final world space positions of the triangles
+    - store the new triangles
+
+- construct a single mesh from all triangles
+
+
+The simplest way to iterate over each voxel is to iterate over each possible `v0` corner.
+This is easy, but incredibly slow.
+
+```gdscript
+# we'll need this for sampling voxels
+var samples := PackedVector4Array()
+samples.resize(8)
+
+# iterate the naive way
+for y in sample_dim.y - 1:
+	for x in sample_dim.x - 1:
+		for z in sample_dim.z - 1:
+```
+
+Now, we sample each corner using some density function.
+
+This density function is where all the cool terrain feature generation happens,
+but for now let's hard code it to output our example voxel from earlier.
+
+```gdscript
+var v0 := Vector3(x, y, z)
+var case_idx := 0
+for i in 8:
+	var point := v0 + offset_from_v0(i)
+	var d := density(point)
+	if d < surface_level:
+		case_idx |= 1 << i
+	# store the voxel points and their densities for the next step
+	samples[i] = Vector4(point.x, point.y, point.z, d)
+
+
+
+func density(world: Vector3) -> float:
+	# v1
+	if world.is_equal_approx(Vector3(1, 0, 0)): return -1.
+	# v5
+	elif world.is_equal_approx(Vector3(1, 1, 0)): return -1.
+	# v7
+	elif world.is_equal_approx(Vector3(0, 1, 1)): return -1.
+	return 1.0
+
+func offset_from_v0(id: int) -> Vector3:
+	match id:
+		0: return Vector3.ZERO
+		1: return Vector3(1, 0, 0)
+		2: return Vector3(1, 0, 1)
+		3: return Vector3(0, 0, 1)
+		4: return Vector3(0, 1, 0)
+		5: return Vector3(1, 1, 0)
+		6: return Vector3(1, 1, 1)
+		7: return Vector3(0, 1, 1)
+	return Vector3.ZERO
+```
+
+Now we can grab the triangle configuration from the lookup table and interpolate
+along the edges to find where they will sit in world space. This interpolation
+determines how smooth our terrain will be.
+
+Here `LUT` is a named class with our lookup tables.
+Checkout the [source](https://github.com/deparr/marching-cubes) or this [write up](https://paulbourke.net/geometry/polygonise/) for details.
+
+```gdscript
+# voxel is either entirely inside or outside the mesh
+if case_idx == 0 or case_idx == 255:
+    continue
+
+# in order to be const (and run in editor) this array has to be typed
+# as Array[Array], instead of Array[PackedInt32Array], kinda annoying
+var tri_edges := LUT.tris[case_idx]
+for i in tri_data.size() / 3:
+	var t := i * 3;
+	# these are the voxel edges our triangle touches
+	var e0: int = tri_data[t]
+	var e1: int = tri_data[t + 1]
+	var e2: int = tri_data[t + 2]
+
+	# these tables index from voxel edge id to it's endpoint vertex ids
+	# eg. edge 0 gives us 0 and 1 for a and b respectively
+	var e0_a := LUT.vertex_id_from_edge_a[e0]
+	var e0_b := LUT.vertex_id_from_edge_b[e0]
+
+	var e1_a := LUT.vertex_id_from_edge_a[e1]
+	var e1_b := LUT.vertex_id_from_edge_b[e1]
+
+	var e2_a := LUT.vertex_id_from_edge_a[e2]
+	var e2_b := LUT.vertex_id_from_edge_b[e2]
+
+	# interpolate between those verts according to the surface level
+	var a := interp_edge(samples[e0_a], samples[e0_b])
+	var b := interp_edge(samples[e1_a], samples[e1_b])
+	var c := interp_edge(samples[e2_a], samples[e2_b])
+	var normal := (c - a).cross(b - a).normalized()
+
+	# store the final points
+	terrain_verts.push_back(a)
+	terrain_verts.push_back(b)
+	terrain_verts.push_back(c)
+	terrain_normals.push_back(normal)
+	terrain_normals.push_back(normal)
+	terrain_normals.push_back(normal)
+
+
+# xyz is world space, w is sampled density
+# returns interpolated world space pos
+func interp_edge(v0: Vector4, v1: Vector4) -> Vector3:
+	# always use halfway point, results in chunky, angled terrain
+	return (Vector3(v0.x,v0.y,v0.z) + Vector3(v1.x,v1.y,v1.z)) * 0.5
+
+	# linearly interpolate across the edge, results in smoother terrain
+	# var t := (surface_level - v0.w) / (v1.w - v0.w)
+	# var lerped = v0 + ((v1 - v0) * t)
+	# return Vector3(lerped.x, lerped.y, lerped.z)
+```
+
+Once we have all of our triangles, we construct our mesh.
+
+Godot's `ArrayMesh` class does the work for us.
+
+```gdscript
+if terrain_verts.size() > 0:
+	var mesh_data = []
+	mesh_data.resize[Mesh.ARRAY_MAX]
+	mesh_data[Mesh.ARRAY_VERTEX] = terrain_verts
+	mesh_data[Mesh.ARRAY_NORMAL] = terrain_normals
+	terrain_mesh.create_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_data)
+else:
+	print("None of the voxels cleared the surface level!")
+```
+
+Now if we set `sample_dim = (2, 2, 2)` and click our generate button,
+a mesh identical to our example voxel from earlier should appear.
+
+Nice!
+
+## Making Terrain
+
+Okay, we can make a single voxel, how do we turn this into terrain?
+
+First thing we can do is scale up our sample space.
+Reminder that we iterate over this in nested, serial loops; our generator's performance drops insanely quick:
+
+- `16x16x16` is instant but isn't interesting
+- `32x32x32` takes \~0.5s, also isn't interesting
+- `64x32x64` takes \~2s, and starts to look like terrain
+- `128x32x128` takes \~10s, and is the sweet spot for our bad implementation
+- `512x32x512` takes \~120s, but is pretty cool
+- `1024x32x1024` takes long enough that it prompted me to track time
+  stats and I didn't do it again
+
+Next thing we need is actual data to sample. A standard `NoiseTexture3D` works fine here.
+I had good results using a small, 16x16x16 Value noise texture with medium frequency (\~0.2) and very low fractal gain (\~0.06).
+
+Let's update our density function to sample the noise:
+
+```gdscript
+func density(world: Vector3) -> float:
+	# start with negative y coord to mostly guarantee we have a ground plane
+	var d := -world.y
+
+	# remap coords so y samples depth instead
+	# optionally we can always set y 0, which  *usually* ensures the
+	# terrain has no overhanging features
+	var noisec = Vector3(world.x, world.z, world.y)
+
+	# low frequency at high amplitudes creates large structures like mountains and canyons
+	# we also rescale the noise from [0, 1] to [-1, 1] so it both adds
+	# to and subtracts from the surface height
+	d += (1. - 2. * noise.noise.get_noise_3dv(noisec * 0.08927)) * 8
+	d += (1. - 2. * noise.noise.get_noise_3dv(noisec * 0.4958)) * 4
+	d += (1. - 2. * noise.noise.get_noise_3dv(noisec * 0.234)) * 2
+
+	# high frequency at low amplitudes creates small details, but at the
+	# scales our cpu marcher can handle they don't look very good
+	# d += (1. - 2. * noise.noise.get_noise_3d(world.x * 8, world.z, world.y / 2)) * .2
+	# d += (1. - 2. * noise.noise.get_noise_3d(world.x * 2, world.z * 4, world.y)) * .1
+
+	return d
+```
+
+With that we start to get something that resembles terrain.
+
+
+![128x32x128 chunk of angular, solid colored terrain](/img/mc_angular_no_ramp.png)
+
+Looking good!
+
+{.callout}
+> Though I should note that you need far more noise layers to get realistic
+> terrain, at least 7 layers spanning various frequencies and amplitudes.
+
+Right now our triangle vertices are always being interpolated to the midpoint
+of voxel edges. Swapping that for a linear interpolation will smooth out
+those harsh angles.
+
+Using a custom shader we can also do height based coloring: 
+
+![128x32x128 chunk of smooth naturally colored mountains](/img/mc_smooth_ramp.png)
+
+## Optimizing
+
+Obviously our current generator is ungodly slow. It runs on the cpu, processing
+a single voxel at a time. We could cap our chunk size to something small and
+spin up more cpu threads, but that's like counting out loud by 10 instead of 1 and
+expecting to reach a million any faster.
+
+To make this meaningfully faster we need use the gpu to process thousands of voxels in parallel.
+
+{.callout}
+> Up until now I've been avoiding looking at others' implementations,
+> but I'm not super familiar with compute shaders yet.
+> So I'm leaving the compute shader code out of the post because a) I
+> didn't a good chunk of it, b) my understanding of it is shaky at best,
+> and c) it's pretty long.
+
+Running this as a compute shader requires a lot more boilerplate code
+to handle data transfer to and from the gpu, though the actual shader looks
+similar to our serial gdscript code.
+
+{.aside .note}
+> Small aside, working with compute shaders really makes me wish gdscript
+> had a struct type with well defined layout semantics. Or at least something
+> similar to python's [struct tools](https://docs.python.org/3/library/struct.html).
+> C# has these things, but is missing some tool script features; what can you do
+
+
+I'm still not very good at tweaking the noise layers to get nice looking terrain,
+but at least I can iterate quickly with the newfound speed of the compute shader.
+
+![desert valley terrain](/img/mc_comp_valley.png)
+
+With a little bit of lighting and fog, it makes nice caves too.
+
+![dark foggy cave](/img/mc_comp_cave.png)
+
+## Next Steps
+
+I like the small terrains I was able to make but there's still many improvements to make:
+
+- mesh topology, right now my triangles don't share vertices at all
+- learning how to properly layer noise to make natural terrain
+- exploring how to create specific terrain features from only math; caves, plains, etc
+- implementing a chunk system to support an infinite world
+- proper texturing and coloring, not just height based
+- better understanding of gpu memory instead of allocating a "seems good
+  enough" amount of triangles and hoping
+
+Oh well, there's always more to learn!
+
+Thanks for reading!
+
+Source for both implementations is on [github](https://github.com/deparr/marching-cubes).
+
+
+#### References
+
+- <https://people.eecs.berkeley.edu/~jrs/meshpapers/LorensenCline.pdf>
+- <https://paulbourke.net/geometry/polygonise/>
+- <https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu>
+- <https://www.youtube.com/watch?v=M3iI2l0ltbE>
+

@@ -110,7 +110,7 @@ body::before {
 }
 
 #main {
-    max-width: 100ch;
+    max-width: 90ch;
     height: 100%;
     display: flex;
     margin: 0 auto;
@@ -253,6 +253,8 @@ hr {
 }
 
 ol, ul, dd { margin-left: 3ch; }
+
+li > ul { margin-bottom: 0; }
 
 p, table, ol, ul, ul, figure, aside, sl { margin-bottom: 1rem; }
 
@@ -401,6 +403,16 @@ svg.toggle-icon {
     color: var(--bg);
     fill: var(--bg);
     stroke: var(--bg);
+}
+
+blockquote.callout {
+    padding-left: 1em;
+    border-left: 4px solid var(--error);
+}
+
+blockquote.aside {
+    padding-left: 1em;
+    border-left: 4px solid var(--link);
 }
 
 /* colors */
