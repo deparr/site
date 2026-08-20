@@ -20,7 +20,7 @@ const site = lume({ src: "./src", location: new URL("https://dparrott.dev") })
         output: ["/feed.xml"],
         query: "post",
         info: {
-            title: "=site.title",
+            title: "dparrott.dev",
             description: "=site.description",
             generator: false,
             lang: "en",
