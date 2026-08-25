@@ -89,11 +89,12 @@ async function main() {
             await download_file(parser_sources[lang].highlights, query_out_path);
         }
 
-        if (downloaded_queries) {
-            console.log("\n remember to clean the newly downloaded query files!");
-            console.log("lua-match -> match");
-            console.log("!!!\nalso find a better query source or process them automatically");
-        }
+    }
+
+    if (downloaded_queries) {
+        console.log("\n remember to clean the newly downloaded query files!");
+        console.log("lua-match -> match");
+        console.log("!!!\nalso find a better query source or process them automatically");
     }
 }
 

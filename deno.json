@@ -50,7 +50,7 @@
     },
     "fetch-parsers": {
         "description": "Fetch treesitter parsers and queries",
-        "command": "deno download_ts_parsers.ts"
+        "command": "deno --allow-read --allow-env --allow-write download_ts_parsers.ts"
     }
   },
   "compilerOptions": {
