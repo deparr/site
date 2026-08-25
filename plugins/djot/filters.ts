@@ -54,6 +54,8 @@ export const overrides: Visitor<HTMLRenderer, string> = {
         if (has_class(node.attributes, "video")) {
             return `<video src="${destination}" controls muted=true></video>`;
         }
+        if (!node.attributes) node.attributes = {}
+        node.attributes.loading = "lazy";
         return r.renderAstNodeDefault(node);
     },
     code_block: (node: CodeBlock, r: HTMLRenderer) => {
