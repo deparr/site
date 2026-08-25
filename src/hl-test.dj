@@ -1,9 +1,13 @@
 +++
-title = "Highlight Test"
+title = "Render Test"
 +++
 
-Code Highlight Test Page
+Djot Rendering Test Page
 
+*Emoji*
+
+:fire: :transgender_flag: :flag_kiribati: :ant: :airplane: :alien: :package:
+:cyclone: :milky_way: :metro: :moai: :monkey: :rainbow_flag: :distorted_face:
 
 *Bash*
 

@@ -6,10 +6,18 @@ import {
     type Para,
     type Section,
     type Visitor,
-    type CodeBlock
+    type CodeBlock,
+    Symb
 } from "./deps.ts";
 
 import { wrapAndHighlightCode } from "../ts_highlight/mod.ts";
+import emojidata from "./emoji-en-US.json" with { type: "json" };
+
+const emoji_map = new Map(Object.entries(emojidata));
+
+function normalize(emoji_name: string): string {
+    return emoji_name.replaceAll(" ", "_").toLowerCase();
+}
 
 function has_class(attrs: Attributes | undefined, _class: string): boolean {
     if (!attrs) return false;
@@ -58,7 +66,15 @@ export const overrides: Visitor<HTMLRenderer, string> = {
         node.attributes.loading = "lazy";
         return r.renderAstNodeDefault(node);
     },
-    code_block: (node: CodeBlock, r: HTMLRenderer) => {
+    code_block: (node: CodeBlock, _r: HTMLRenderer): string => {
         return wrapAndHighlightCode(node.text.trim(), node.lang);
     },
+    symb: (node: Symb, r: HTMLRenderer): string => {
+        const normalized_alias = normalize(node.alias);
+        const emoji = emoji_map.get(normalized_alias);
+        if (!emoji) return r.renderAstNodeDefault(node);
+
+        const readable_alias = normalized_alias.replaceAll("_", " ");
+        return `<span role="img" aria-label="${readable_alias} emoji">${emoji}</span>`;
+    }
 };
