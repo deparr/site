@@ -2,10 +2,10 @@ import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import date from "lume/plugins/date.ts";
 import extractDate from "lume/plugins/extract_date.ts";
-import feed from "lume/plugins/feed.ts";
 
 import { formatInTimeZone } from "npm:date-fns-tz@3.2.0";
 
+import feed from "./plugins/feed/mod.ts";
 import djot from "./plugins/djot/mod.ts";
 import ts_highlight from "./plugins/ts_highlight/mod.ts";
 import { filters, overrides } from "./plugins/djot/filters.ts";

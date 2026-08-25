@@ -1,6 +1,6 @@
 +++
 title = "Godot Procgen: Marching Cubes"
-description = ""
+description = "The beginning of a hopefully successful journey into 3D graphics and procedural generation"
 tags = ["post", "godot", "graphics", "procgen"]
 +++
 
