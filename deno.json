@@ -44,10 +44,6 @@
       "description": "Run and serve the site for development",
       "command": "deno task lume -s"
     },
-    "new": {
-      "description": "Create new content or code using artifacts",
-      "command": "deno task lume new"
-    },
     "fetch-parsers": {
         "description": "Fetch treesitter parsers and queries",
         "command": "deno --allow-read --allow-env --allow-write download_ts_parsers.ts"
