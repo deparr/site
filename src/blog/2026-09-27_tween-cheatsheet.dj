@@ -1,0 +1,15 @@
++++
+title = "Godot Tween Cheatsheet"
+description = "I wanted an updated cheatsheet"
+tags = ["post"]
++++
+
+The first google result for "godot tween transition types" is this [reddit post][] (thank you u/wandomPewlin).
+
+The chart is great, but it's six years old and missing the spring and back transitions.
+
+[reddit post]: https://www.reddit.com/r/godot/comments/frqzup/godot_tweening_cheat_sheet/
+
+So I remade the chart with the new transitions:
+
+![godot tween transition and easing cheatsheet](/img/tween_sheet.webp)
